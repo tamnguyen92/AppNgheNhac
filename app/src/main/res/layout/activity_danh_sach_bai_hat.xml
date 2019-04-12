@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    android:id="@+id/coordinatorLayout"
+    tools:context=".activity.DanhSachBaiHatActivity">
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="270dp"
+    android:id="@+id/appBarLayout"
+    android:fitsSystemWindows="true">
+    <android.support.design.widget.CollapsingToolbarLayout
+        app:expandedTitleGravity="center|bottom"
+        app:expandedTitleMarginBottom="30dp"
+        android:background="@drawable/ic_launcher_background"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:expandedTitleTextAppearance="@style/Toolbar.TitleText"
+        app:collapsedTitleTextAppearance="@style/Toolbar.TitleText"
+        android:id="@+id/collapsingToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/imgdanhsachcakhuc2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+        <View
+            android:background="@drawable/custom_background_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </View>
+        <android.support.v7.widget.Toolbar
+            android:elevation="6dp"
+            app:layout_collapseMode="pin"
+            android:id="@+id/toolbardanhsach"
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+
+        </android.support.v7.widget.Toolbar>
+        <ImageView
+            android:layout_marginBottom="10dp"
+            app:layout_collapseMode="none"
+            android:elevation="6dp"
+            android:scaleType="fitXY"
+            android:id="@+id/imgdanhsachcakhuc"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"/>
+    </android.support.design.widget.CollapsingToolbarLayout>
+</android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floattingactionButton"
+        android:src="@drawable/iconfloatingactionbutton"
+        android:backgroundTint="#d602ee"
+        app:fabSize="normal"
+        android:scaleType="fitXY"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="30dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleViewdanhsachbaihat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

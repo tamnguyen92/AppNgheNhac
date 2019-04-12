@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#8f367c</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colortran">#00D81B60</color>
+    <color name="maudo">#F44336</color>
+    <color name="white">#FFFF</color>
+    <color name="maucam">#FF9800</color>
+    <color name="mauvang">#FFFF00</color>
+    <color name="mauxanh">#00E676</color>
+    <color name="mauluc">#00B0FF</color>
+    <color name="maulam">#1976D2</color>
+    <color name="maucham">#673AB7</color>
+    <color name="mautim">#18FFFF</color>
+    <color name="mautim1">#D500F9</color>
+    <color name="mau3">#BDBDBD</color>
+    <color name="mau4">#FFC107</color>
+    <color name="mau5">#76FF03</color>
+    <color name="mau6">#FF4081</color>
+</resources>

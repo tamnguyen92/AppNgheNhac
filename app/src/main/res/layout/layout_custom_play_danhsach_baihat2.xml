@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/fram_danhsachbaihat"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+
+            android:weightSum="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_margin="2dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/imggif"
+                    android:layout_width="27dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:textColor="#000"
+                    android:layout_gravity="center"
+                    android:id="@+id/txtsothutu"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:text="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#000"
+                    android:id="@+id/txttenbaihatplay"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:text="tinh yeu doi ta alibaba gjhgjhgjhgjhgjhgh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   ></TextView>
+                <TextView
+                    android:id="@+id/txttencasiplay"
+                    android:maxLines="1"
+                    android:textColor="#BDBDBD"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:text="TamKute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:layout_margin="2dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/iconlove"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

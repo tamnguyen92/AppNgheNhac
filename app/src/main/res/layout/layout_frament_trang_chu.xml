@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/content_fragment_trangchu">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/wiewPager_trangchu"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"></android.support.v4.view.ViewPager>
+        <me.relex.circleindicator.CircleIndicator
+
+            android:id="@+id/indicator_trangchu"
+            android:outlineAmbientShadowColor="#2962FF"
+            android:outlineSpotShadowColor="#80DEEA"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center|top"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp">
+
+        </me.relex.circleindicator.CircleIndicator>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_margin="2dp"
+                android:background="#FFFF00"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                ></View>
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:textStyle="italic|bold"
+                android:textSize="15sp"
+                android:fontFamily="casual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ca khúc mới nhất :"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstBaiHat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_margin="2dp"
+            android:background="#FFFF00"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            ></View>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textStyle="italic|bold"
+            android:textSize="15sp"
+            android:fontFamily="casual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Playlist hot :"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/btnplaylistmore"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_button"
+            android:gravity="right"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lstPlaylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_margin="2dp"
+                android:background="#FFFF00"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                ></View>
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:textStyle="italic|bold"
+                android:textSize="15sp"
+                android:fontFamily="casual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Album mới phát hành :"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnAlbummore"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/custom_button"
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstAlbum"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_margin="2dp"
+                android:background="#FFFF00"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                ></View>
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:textStyle="italic|bold"
+                android:textSize="15sp"
+                android:fontFamily="casual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chủ Đề nổi bật :"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstChude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+        <Button
+            android:id="@+id/btnclick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="click vao nha"/>
+    </LinearLayout>
+
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+
+

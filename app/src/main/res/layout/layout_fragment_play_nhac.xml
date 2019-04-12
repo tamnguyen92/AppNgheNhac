@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center"
+        android:layout_width="400dp"
+        android:layout_height="400dp">
+        <ImageView
+            android:layout_gravity="center"
+            android:alpha="0.6"
+            android:src="@drawable/disc2"
+            android:layout_width="380dp"
+            android:layout_height="380dp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:layout_gravity="center"
+            android:id="@+id/imgCircle"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:fontFamily="casual"
+            android:textColor="#ffff"
+            android:id="@+id/txttenbaihat1"
+            android:textStyle="bold"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ten bai hat"/>
+        <TextView
+            android:textColor="#ffff"
+            android:id="@+id/txttencasi1"
+            android:textStyle="bold"
+            android:fontFamily="casual"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ten bai hat"/>
+    </LinearLayout>
+
+</FrameLayout>

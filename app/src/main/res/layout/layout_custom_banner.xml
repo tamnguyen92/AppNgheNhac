@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_banner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<ImageView
+    android:scaleType="fitXY"
+    android:id="@+id/imageview_custom_banner"
+    android:layout_width="match_parent"
+    android:layout_height="200dp" />
+    <View
+        android:background="@drawable/custom_background_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></View>
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageview_custom_banner">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/imageview_banner"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="2dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+        <TextView
+
+            android:textSize="18sp"
+            android:textColor="#FFFF"
+            android:textStyle="bold|italic"
+            android:id="@+id/txttitlebaihat"
+            android:layout_alignTop="@+id/imageview_banner"
+            android:text="Anh La Nguoi Den Sau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageview_banner"/>
+        <RelativeLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txttitlebaihat"
+            android:layout_toRightOf="@+id/imageview_banner"
+            >
+            <TextView
+                android:id="@+id/txtnoidungbaihat"
+                android:textColor="#FFFF"
+                android:maxLines="2"
+                android:textSize="13sp"
+                android:layout_marginRight="20dp"
+                android:text="Bai hat moi nhat tu ca sy nguyen van tammmmmmmmmmmmmm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

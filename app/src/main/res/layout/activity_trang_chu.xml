@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:id="@+id/frame"
+    tools:context=".activity.TrangChuActivity">
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/myViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v4.view.ViewPager>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb1"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:bmb_backgroundEffect="false"
+                    app:bmb_showDuration="2000"
+                    app:bmb_hideDuration="2000"
+                    app:bmb_buttonEnum="textOutsideCircle"
+                    app:bmb_piecePlaceEnum="piecePlace_dot_9_1"
+                    app:bmb_buttonPlaceEnum="buttonPlace_sc_9_2"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </FrameLayout>
+
+    <android.support.design.widget.TabLayout
+        app:tabIndicatorColor="#c810dc"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#c810dc"
+        app:tabTextColor="#0d0d0d"
+        app:tabIndicatorHeight="2dp"
+        android:id="@+id/myTabLayout"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+    </android.support.design.widget.TabLayout>
+</LinearLayout>
