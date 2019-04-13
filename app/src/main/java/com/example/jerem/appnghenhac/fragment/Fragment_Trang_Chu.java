@@ -117,26 +117,7 @@ public class Fragment_Trang_Chu extends Fragment {
 
            }
        });
-//        callback.enqueue(new Callback<List<Album>>() {
-//            @Override
-//            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
-//                albums= (ArrayList<Album>) response.body();
-//                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
-//                if(albums.size()>0){
-//                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
-//                    adapterAlbum=new AdapterAlbum(getActivity(),albums);
-//                    lstAlbum.setHasFixedSize(true);
-//                    lstAlbum.setLayoutManager(layoutManager);
-//                    lstAlbum.setAdapter(adapterAlbum);
-//                    adapterAlbum.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Album>> call, Throwable t) {
-//
-//            }
-//        });
+
     }
 
     private void addControll() {
@@ -250,7 +231,7 @@ public class Fragment_Trang_Chu extends Fragment {
                 Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
                 if(baiHats.size()>0){
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
-                    adapterBaihat=new AdapterBaihat(getActivity(),baiHats);
+                    adapterBaihat=new AdapterBaihat(getActivity(),baiHats,R.layout.layout_custom_baihat);
                     lstBaiHat.setHasFixedSize(true);
                     lstBaiHat.setLayoutManager(layoutManager);
                     lstBaiHat.setAdapter(adapterBaihat);

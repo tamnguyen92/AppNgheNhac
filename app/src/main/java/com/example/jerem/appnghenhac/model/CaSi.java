@@ -19,7 +19,7 @@ private String hinhanhCasi;
 private String tencasy;
 @SerializedName("hinhanhlon_casi")
 @Expose
-private Object hinhanhlonCasi;
+private String hinhanhlonCasi;
 
     protected CaSi(Parcel in) {
         if (in.readByte() == 0) {
@@ -29,6 +29,7 @@ private Object hinhanhlonCasi;
         }
         hinhanhCasi = in.readString();
         tencasy = in.readString();
+        hinhanhlonCasi = in.readString();
     }
 
     public static final Creator<CaSi> CREATOR = new Creator<CaSi>() {
@@ -67,11 +68,11 @@ public void setTencasy(String tencasy) {
 this.tencasy = tencasy;
 }
 
-public Object getHinhanhlonCasi() {
+public String getHinhanhlonCasi() {
 return hinhanhlonCasi;
 }
 
-public void setHinhanhlonCasi(Object hinhanhlonCasi) {
+public void setHinhanhlonCasi(String hinhanhlonCasi) {
 this.hinhanhlonCasi = hinhanhlonCasi;
 }
 
@@ -90,5 +91,6 @@ this.hinhanhlonCasi = hinhanhlonCasi;
         }
         dest.writeString(hinhanhCasi);
         dest.writeString(tencasy);
+        dest.writeString(hinhanhlonCasi);
     }
 }

@@ -27,7 +27,8 @@
         <activity android:name=".activity.PlayNhacActivity" />
         <activity android:name=".activity.ExamActivity" />
         <activity android:name=".activity.DanhSachBaiHatActivity" />
-        <activity android:name=".activity.PlaylistActivity"></activity>
+        <activity android:name=".activity.PlaylistActivity" />
+        <activity android:name=".activity.CaSiActivity"></activity>
     </application>
 
 </manifest>

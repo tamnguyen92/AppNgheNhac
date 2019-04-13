@@ -15,4 +15,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
     </style>
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/mau3</item> <!-- Whatever color you want-->
+    </style>
 </resources>

@@ -21,10 +21,11 @@ import java.util.ArrayList;
 public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder> {
     Context context;
     ArrayList<BaiHat>baiHats;
-
-    public AdapterBaihat(Context context, ArrayList<BaiHat> baiHats) {
+    int layout;
+    public AdapterBaihat(Context context, ArrayList<BaiHat> baiHats,int layout) {
         this.context = context;
         this.baiHats = baiHats;
+        this.layout=layout;
     }
 
     @NonNull
@@ -32,7 +33,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
     @Override
     public AdapterBaihat.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=inflater.inflate(R.layout.layout_custom_baihat,parent,false);
+        View view=inflater.inflate(layout,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }

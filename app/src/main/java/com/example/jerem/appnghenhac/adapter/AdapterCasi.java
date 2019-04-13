@@ -1,6 +1,7 @@
 package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.CaSiActivity;
 import com.example.jerem.appnghenhac.model.CaSi;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +38,7 @@ public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCasi.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterCasi.ViewHolder holder, final int position) {
         Picasso.with(context)
                 .load(caSis.get(position).getHinhanhCasi().trim())
                 .into(holder.imgCircle_casi);
@@ -45,7 +47,9 @@ public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
         holder.frameCasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(context,CaSiActivity.class);
+                intent.putExtra("casy",caSis.get(position));
+                context.startActivity(intent);
             }
         });
     }
