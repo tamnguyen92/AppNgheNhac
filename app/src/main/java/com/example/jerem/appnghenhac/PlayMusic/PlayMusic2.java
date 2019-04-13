@@ -26,6 +26,7 @@ public class PlayMusic2 {
     public static MediaPlayer mPlayer;
     public static int modePlay=0; // 0.laplai ,1 phat tiep, 2.tron bai
     public static int position=0;
+    public static BaiHat baiHat=null;
     public static int totalTimeLengthInMilliseconds=0;
     public static SimpleDateFormat simpleDateFormat=new SimpleDateFormat("mm:ss");
     public static int bufferingUpdate=0;
@@ -36,6 +37,7 @@ public class PlayMusic2 {
 //    public static  CallbackPlay callbackPlay;
 
     public static void Play(final String url, final SeekBar seekBar, final TextView txtviewtongtimesong, final CallbackPlay callbackPlay, final Context context){
+        baiHat=listBaihat.get(position);
         if(mPlayer != null){
             mPlayer.stop();
             mPlayer.reset();

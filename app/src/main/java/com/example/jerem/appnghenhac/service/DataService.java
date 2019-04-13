@@ -2,6 +2,7 @@ package com.example.jerem.appnghenhac.service;
 
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
@@ -30,8 +31,19 @@ public interface DataService {
     @GET("album")
     Call<List<Album>> Getdata_Album();
 
+    @GET("casi")
+    Call<List<CaSi>> Getdata_Casi();
+
     @FormUrlEncoded
     @POST("album")
     Call<List<BaiHat>> Getdata_BaiHatTheoAlbum(@Field("idAlbum") int idAlbum);
+
+    @FormUrlEncoded
+    @POST("playlist")
+    Call<List<BaiHat>> Getdata_BaiHatTheoPlaylist(@Field("idplaylist") int idplaylist);
+
+    @FormUrlEncoded
+    @POST("playlist/theochude")
+    Call<List<Playlist>> Getdata_PlaylistTheoChude(@Field("idchude") int idchude);
 
 }

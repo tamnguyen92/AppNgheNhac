@@ -19,12 +19,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhacList;
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
 import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
@@ -130,6 +132,34 @@ QuangCao q=null;
             }
         });
     }
+    private void getDataPlaylist(int idPlaylist) {
+        //Log.d("ALBUM", "getDataAlbums: "+idAlbum);
+        Call<List<BaiHat>>callback=dataService.Getdata_BaiHatTheoPlaylist(idPlaylist);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                baiHatArrayList= (ArrayList<BaiHat>) response.body();
+                Log.d("TAM_LOG","BAIHAT LIST "+baiHatArrayList.get(0).getTenbaihat());
+                if(baiHatArrayList.size()>0){
+                    setData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(adapterPlaynhac !=null){
+            adapterPlaynhac.notifyDataSetChanged();
+        }
+    }
+
     private void getDataIntent() {
         Intent intent=getIntent();
         if(intent.hasExtra("listcakhuc") && intent.hasExtra("position")){
@@ -153,6 +183,15 @@ QuangCao q=null;
                 linkHinh=album.getHinhAlbum();
                 tentitle=album.getTenAlbum();
                 getDataAlbums(album.getIdAlbum());
+            }
+        }
+        if (intent.hasExtra("playlist")){
+            Playlist playlist=null;
+            playlist=intent.getParcelableExtra("playlist");
+            if(playlist!=null){
+                linkHinh=playlist.getHinhPlaylist();
+                tentitle=playlist.getTenPlaylist();
+                getDataPlaylist(playlist.getIdPlaylist());
             }
         }
     }

@@ -21,10 +21,12 @@ import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterBanner;
+import com.example.jerem.appnghenhac.adapter.AdapterCasi;
 import com.example.jerem.appnghenhac.adapter.AdapterChuDe;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaylist;
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
@@ -74,6 +76,11 @@ public class Fragment_Trang_Chu extends Fragment {
     ArrayList<Album>albums;
     RecyclerView lstAlbum;
     AdapterAlbum adapterAlbum;
+
+    //CASY
+    ArrayList<CaSi>caSis;
+    RecyclerView lstCasi;
+    AdapterCasi adapterCasi;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,12 +90,57 @@ public class Fragment_Trang_Chu extends Fragment {
         getDataPlaylist();
         getDataChuDe();
         getData10BaiHat();
+        getDataCasi();
         getDataAlbums();
         return view;
     }
 
-    private void addControll() {
+    private void getDataCasi() {
+       Call<List<CaSi>> callback=dataService.Getdata_Casi();
+       callback.enqueue(new Callback<List<CaSi>>() {
+           @Override
+           public void onResponse(Call<List<CaSi>> call, Response<List<CaSi>> response) {
+               caSis= (ArrayList<CaSi>) response.body();
+//                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
+                if(caSis.size()>0){
+                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
+                    adapterCasi=new AdapterCasi(getActivity(),caSis);
+                    lstCasi.setHasFixedSize(true);
+                    lstCasi.setLayoutManager(layoutManager);
+                    lstCasi.setAdapter(adapterCasi);
+                    adapterCasi.notifyDataSetChanged();
+                }
+           }
 
+           @Override
+           public void onFailure(Call<List<CaSi>> call, Throwable t) {
+
+           }
+       });
+//        callback.enqueue(new Callback<List<Album>>() {
+//            @Override
+//            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
+//                albums= (ArrayList<Album>) response.body();
+//                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
+//                if(albums.size()>0){
+//                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
+//                    adapterAlbum=new AdapterAlbum(getActivity(),albums);
+//                    lstAlbum.setHasFixedSize(true);
+//                    lstAlbum.setLayoutManager(layoutManager);
+//                    lstAlbum.setAdapter(adapterAlbum);
+//                    adapterAlbum.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Album>> call, Throwable t) {
+//
+//            }
+//        });
+    }
+
+    private void addControll() {
+        caSis=new ArrayList<>();
         Banners=new ArrayList<>();
         playlists=new ArrayList<>();
         chuDes=new ArrayList<>();
@@ -99,6 +151,7 @@ public class Fragment_Trang_Chu extends Fragment {
         lstchude=view.findViewById(R.id.lstChude);
         lstBaiHat=view.findViewById(R.id.lstBaiHat);
         lstAlbum=view.findViewById(R.id.lstAlbum);
+        lstCasi=view.findViewById(R.id.lstCasi);
 
         dataService=APIService.getService();
 

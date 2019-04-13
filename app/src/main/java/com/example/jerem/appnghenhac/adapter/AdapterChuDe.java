@@ -1,6 +1,7 @@
 package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.PlaylistActivity;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.squareup.picasso.Picasso;
 
@@ -45,6 +47,9 @@ public class AdapterChuDe extends RecyclerView.Adapter<AdapterChuDe.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,"vi tri : "+position,Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(context,PlaylistActivity.class);
+                intent.putExtra("chude",chuDes.get(position));
+                context.startActivity(intent);
             }
         });
     }

@@ -1,9 +1,12 @@
 package com.example.jerem.appnghenhac.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Playlist {
+public class Playlist implements Parcelable {
 
 @SerializedName("id_playlist")
 @Expose
@@ -21,7 +24,30 @@ private String hinhPlaylist;
 @Expose
 private Object iconPlaylist;
 
-public Integer getIdPlaylist() {
+    protected Playlist(Parcel in) {
+        if (in.readByte() == 0) {
+            idPlaylist = null;
+        } else {
+            idPlaylist = in.readInt();
+        }
+        idChudePlaylist = in.readString();
+        tenPlaylist = in.readString();
+        hinhPlaylist = in.readString();
+    }
+
+    public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
+        @Override
+        public Playlist createFromParcel(Parcel in) {
+            return new Playlist(in);
+        }
+
+        @Override
+        public Playlist[] newArray(int size) {
+            return new Playlist[size];
+        }
+    };
+
+    public Integer getIdPlaylist() {
 return idPlaylist;
 }
 
@@ -61,4 +87,21 @@ public void setIconPlaylist(Object iconPlaylist) {
 this.iconPlaylist = iconPlaylist;
 }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (idPlaylist == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(idPlaylist);
+        }
+        dest.writeString(idChudePlaylist);
+        dest.writeString(tenPlaylist);
+        dest.writeString(hinhPlaylist);
+    }
 }

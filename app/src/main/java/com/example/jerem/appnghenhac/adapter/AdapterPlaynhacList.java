@@ -49,18 +49,23 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
         holder.txttencasiplay.setText(baiHat.getTencasiBaihat());
         holder.txttenbaihatplay.setText(baiHat.getTenbaihat());
         holder.txtsothutu.setText(stt+"");
-//        if(position==PlayMusic2.position){
-//            holder.imggif.setVisibility(View.VISIBLE);
-//            Glide.with(context)
-//                    .load(R.drawable.gif_radio)// you may not need this
-//                    .into(holder.imggif);
-//             holder.txtsothutu.setVisibility(View.INVISIBLE);
-//        }else {
-//
-//            holder.imggif.setImageResource(R.drawable.replay_black);
-//            holder.imggif.setVisibility(View.INVISIBLE);
-//            holder.txtsothutu.setVisibility(View.VISIBLE);
-//        }
+        if(PlayMusic2.baiHat !=null){
+            if(baiHats.get(position).getIdBaihat()== PlayMusic2.baiHat.getIdBaihat()){
+
+                holder.imggif.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(R.drawable.gif_radio)// you may not need this
+                        .into(holder.imggif);
+                holder.txtsothutu.setVisibility(View.INVISIBLE);
+
+            }  else {
+
+                holder.imggif.setImageResource(R.drawable.replay_black);
+                holder.imggif.setVisibility(View.INVISIBLE);
+                holder.txtsothutu.setVisibility(View.VISIBLE);
+            }
+
+        }
         holder.fram_danhsachbaihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

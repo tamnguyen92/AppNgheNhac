@@ -25,8 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.PlayNhacActivity" />
-        <activity android:name=".activity.ExamActivity"></activity>
-        <activity android:name=".activity.DanhSachBaiHatActivity"></activity>
+        <activity android:name=".activity.ExamActivity" />
+        <activity android:name=".activity.DanhSachBaiHatActivity" />
+        <activity android:name=".activity.PlaylistActivity"></activity>
     </application>
 
 </manifest>

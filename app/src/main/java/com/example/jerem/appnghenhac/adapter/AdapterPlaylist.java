@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.DanhSachBaiHatActivity;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.fragment.Fragment_Trang_Chu;
 import com.example.jerem.appnghenhac.model.Playlist;
@@ -49,8 +50,8 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,"vi tri : "+position,Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(context,PlayNhacActivity.class);
-                intent.putExtra("listcakhuc",Fragment_Trang_Chu.baiHats);
+                Intent intent=new Intent(context,DanhSachBaiHatActivity.class);
+                intent.putExtra("playlist",playlists.get(position));
                 context.startActivity(intent);
             }
         });
