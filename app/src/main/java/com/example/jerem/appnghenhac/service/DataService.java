@@ -54,4 +54,12 @@ public interface DataService {
     @POST("casi/album")
     Call<List<Album>> Getdata_AlbumTheoCaSy(@Field("idCasi") int idCasi);
 
+    @FormUrlEncoded
+    @POST("baihat/search")
+    Call<List<BaiHat>> Getdata_TimKiemBaiHat(@Field("tenbaihat") String tenbaihat);
+
+    @FormUrlEncoded
+    @POST("casi/search")
+    Call<List<CaSi>> Getdata_TimKiemCaSi(@Field("tencasi") String tencasi);
+
 }

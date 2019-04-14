@@ -18,6 +18,7 @@ import android.widget.Button;
 
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
+import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterBanner;
@@ -85,6 +86,7 @@ public class Fragment_Trang_Chu extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.layout_frament_trang_chu,container,false);
+
         addControll();
         getDataQuangCao();
         getDataPlaylist();
@@ -104,7 +106,7 @@ public class Fragment_Trang_Chu extends Fragment {
 //                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
                 if(caSis.size()>0){
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
-                    adapterCasi=new AdapterCasi(getActivity(),caSis);
+                    adapterCasi=new AdapterCasi(getActivity(),caSis,R.layout.layout_custom_casi);
                     lstCasi.setHasFixedSize(true);
                     lstCasi.setLayoutManager(layoutManager);
                     lstCasi.setAdapter(adapterCasi);

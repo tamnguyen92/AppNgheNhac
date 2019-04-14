@@ -10,10 +10,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.R;
@@ -37,7 +43,11 @@ public class TrangChuActivity extends AppCompatActivity {
     TabLayout myTabLayout;
     ViewPager myViewPager;
     LinearLayout frame;
+   public FrameLayout layoutTrangchu;
+   public LinearLayout layoutSearch;
     int PERMISSION_CODE =10000;
+ EditText txtsearch;
+    Fragment_Tim_Kiem fragment_tim_kiem;
     float dX, dY;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +94,12 @@ public class TrangChuActivity extends AppCompatActivity {
     }
 
     private void addControll() {
+        txtsearch=findViewById(R.id.txtsearch);
         myTabLayout=findViewById(R.id.myTabLayout);
         myViewPager=findViewById(R.id.myViewPager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        layoutSearch=findViewById(R.id.layoutSearch);
+        layoutTrangchu=(FrameLayout) findViewById(R.id.layoutTrangchu);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         frame=findViewById(R.id.frame);
         bmb1=findViewById(R.id.bmb1);
@@ -105,15 +118,42 @@ public class TrangChuActivity extends AppCompatActivity {
             bmb1 . addBuilder (builder);
         }
 
+        myTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                myViewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0) {
+                    layoutSearch.setVisibility(View.GONE);
+                    layoutTrangchu.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
+                }if (tab.getPosition() == 1) {
+                    layoutSearch.setVisibility(View.VISIBLE);
+                    layoutTrangchu.setVisibility(View.GONE);
+                    toolbar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
 
     private void init() {
 
+        fragment_tim_kiem=new Fragment_Tim_Kiem();
         // code viewpager va tablayouy
         AdapterMainViewPage adapterMainViewPage=new AdapterMainViewPage(getSupportFragmentManager());
         adapterMainViewPage.addFragment(new Fragment_Trang_Chu(),"Trang Chu");
-        adapterMainViewPage.addFragment(new Fragment_Tim_Kiem(),"Tim Kiem");
+        adapterMainViewPage.addFragment(fragment_tim_kiem,"Tim Kiem");
 
         myViewPager.setAdapter(adapterMainViewPage);
         myTabLayout.setupWithViewPager(myViewPager);
@@ -121,6 +161,24 @@ public class TrangChuActivity extends AppCompatActivity {
         myTabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
         myTabLayout.getTabAt(1).setIcon(R.drawable.iconsearch);
 
+        fragment_tim_kiem= (Fragment_Tim_Kiem) adapterMainViewPage.getItem(1);
+
+        txtsearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+               fragment_tim_kiem.TimKiem(s);
+            }
+        });
         //tiep
 //        String s="https://jeremy02.herokuapp.com/Thanh Xuan Cua Em La Anh - Truong Linh D.mp3";
 //        URI uri = null;

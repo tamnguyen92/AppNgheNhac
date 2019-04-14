@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    android:background="#0f2c63"
+<android.support.v4.widget.NestedScrollView
+    android:background="#FFFFFF"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+  android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bài Hát:"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:id="@+id/lstTimkiemBaihat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></android.support.v7.widget.RecyclerView>
+    <TextView
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nghệ Sĩ:"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:id="@+id/lstTimkiemNgheSi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></android.support.v7.widget.RecyclerView>
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

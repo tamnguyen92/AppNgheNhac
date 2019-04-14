@@ -17,6 +17,7 @@
             android:layout_width="380dp"
             android:layout_height="380dp" />
         <de.hdodenhof.circleimageview.CircleImageView
+            android:elevation="3dp"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:id="@+id/imgCircle"

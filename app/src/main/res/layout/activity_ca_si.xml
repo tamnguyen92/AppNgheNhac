@@ -20,7 +20,7 @@
             android:id="@+id/collapsingToolbarLayoutCasi"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleMarginBottom="30dp"
-            android:background="@drawable/ic_launcher_background"
+
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleTextAppearance="@style/Toolbar.TitleText"
@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                android:src="@drawable/hinhnen"
+
                 app:layout_collapseMode="parallax"
                 />
             <View
@@ -52,7 +52,7 @@
                 android:layout_margin="10dp"
                android:layout_gravity="bottom"
                 android:id="@+id/imgCircle_casi"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/disc"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
 

@@ -22,17 +22,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
     Context context;
     ArrayList<CaSi> caSis;
-
-    public AdapterCasi(Context context, ArrayList<CaSi> caSis) {
+    int layout;
+    public AdapterCasi(Context context, ArrayList<CaSi> caSis,int layout) {
         this.context = context;
         this.caSis = caSis;
+        this.layout=layout;
     }
 
     @NonNull
     @Override
     public AdapterCasi.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=inflater.inflate(R.layout.layout_custom_casi,parent,false);
+        View view=inflater.inflate(layout,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }
@@ -53,7 +54,15 @@ public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
             }
         });
     }
+    public void TimKiemCaSy(ArrayList<CaSi> caSisTimKiem)
+    {
+        caSis.clear();
+        if(caSisTimKiem !=null){
 
+            caSis=caSisTimKiem;
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public int getItemCount() {
         return caSis.size();

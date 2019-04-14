@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull AdapterBaihat.ViewHolder holder, final int positions) {
+        Log.d("VITRI", "onClick: ten"+baiHats.get(positions).getTenbaihat());
         Picasso.with(context)
                 .load(baiHats.get(positions).getHinhanhBaihat().trim())
                 .into(holder.imghinhbaihat);
@@ -50,13 +52,25 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
         holder.frame_baihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("VITRI", "onClick: "+positions);
                 Intent intent=new Intent(context,PlayNhacActivity.class);
                 intent.putExtra("cakhuc",baiHats.get(positions));
                 context.startActivity(intent);
             }
         });
     }
+public void TimKiemBaiHat(ArrayList<BaiHat>baiHatsTimKiem)
+{
+    baiHats.clear();
+    if(baiHatsTimKiem !=null){
 
+        baiHats=baiHatsTimKiem;
+        for(BaiHat b : baiHats){
+            Log.d("VITRI", "onClick: ten"+b.getTenbaihat());
+        }
+        notifyDataSetChanged();
+    }
+}
     @Override
     public int getItemCount() {
         return baiHats.size();
