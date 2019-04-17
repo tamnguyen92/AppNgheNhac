@@ -106,7 +106,7 @@ public class Fragment_Trang_Chu extends Fragment {
 //                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
                 if(caSis.size()>0){
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
-                    adapterCasi=new AdapterCasi(getActivity(),caSis,R.layout.layout_custom_casi);
+                    adapterCasi=new AdapterCasi(getActivity(),caSis,R.layout.layout_custom_casi,0);
                     lstCasi.setHasFixedSize(true);
                     lstCasi.setLayoutManager(layoutManager);
                     lstCasi.setAdapter(adapterCasi);

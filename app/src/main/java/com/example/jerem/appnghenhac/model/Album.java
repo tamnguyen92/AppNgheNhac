@@ -6,8 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Album implements Parcelable {
+public class Album implements Parcelable{
 
+    @SerializedName("luotnghe_album")
+    @Expose
+    private Integer luotngheAlbum;
     @SerializedName("id_album")
     @Expose
     private Integer idAlbum;
@@ -22,7 +25,7 @@ public class Album implements Parcelable {
     private String hinhAlbum;
     @SerializedName("id_theloai_album")
     @Expose
-    private Object idTheloaiAlbum;
+    private Integer idTheloaiAlbum;
     @SerializedName("id_casi")
     @Expose
     private Integer idCasi;
@@ -38,6 +41,11 @@ public class Album implements Parcelable {
 
     protected Album(Parcel in) {
         if (in.readByte() == 0) {
+            luotngheAlbum = null;
+        } else {
+            luotngheAlbum = in.readInt();
+        }
+        if (in.readByte() == 0) {
             idAlbum = null;
         } else {
             idAlbum = in.readInt();
@@ -49,6 +57,11 @@ public class Album implements Parcelable {
             idCasiAlbum = in.readInt();
         }
         hinhAlbum = in.readString();
+        if (in.readByte() == 0) {
+            idTheloaiAlbum = null;
+        } else {
+            idTheloaiAlbum = in.readInt();
+        }
         if (in.readByte() == 0) {
             idCasi = null;
         } else {
@@ -70,6 +83,14 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
+
+    public Integer getLuotngheAlbum() {
+        return luotngheAlbum;
+    }
+
+    public void setLuotngheAlbum(Integer luotngheAlbum) {
+        this.luotngheAlbum = luotngheAlbum;
+    }
 
     public Integer getIdAlbum() {
         return idAlbum;
@@ -103,11 +124,11 @@ public class Album implements Parcelable {
         this.hinhAlbum = hinhAlbum;
     }
 
-    public Object getIdTheloaiAlbum() {
+    public Integer getIdTheloaiAlbum() {
         return idTheloaiAlbum;
     }
 
-    public void setIdTheloaiAlbum(Object idTheloaiAlbum) {
+    public void setIdTheloaiAlbum(Integer idTheloaiAlbum) {
         this.idTheloaiAlbum = idTheloaiAlbum;
     }
 
@@ -143,7 +164,6 @@ public class Album implements Parcelable {
         this.hinhanhlonCasi = hinhanhlonCasi;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -151,6 +171,12 @@ public class Album implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        if (luotngheAlbum == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(luotngheAlbum);
+        }
         if (idAlbum == null) {
             dest.writeByte((byte) 0);
         } else {
@@ -165,6 +191,12 @@ public class Album implements Parcelable {
             dest.writeInt(idCasiAlbum);
         }
         dest.writeString(hinhAlbum);
+        if (idTheloaiAlbum == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(idTheloaiAlbum);
+        }
         if (idCasi == null) {
             dest.writeByte((byte) 0);
         } else {

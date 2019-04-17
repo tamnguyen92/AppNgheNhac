@@ -11,6 +11,7 @@
         android:layout_width="400dp"
         android:layout_height="400dp">
         <ImageView
+            android:id="@+id/imgdisc"
             android:layout_gravity="center"
             android:alpha="0.6"
             android:src="@drawable/disc2"

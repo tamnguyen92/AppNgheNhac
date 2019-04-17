@@ -63,7 +63,7 @@ public class Fragment_Tim_Kiem extends Fragment {
         adapterBaihat.notifyDataSetChanged();
 
         RecyclerView.LayoutManager layoutManagerAlbum=new LinearLayoutManager(getActivity());
-        adapterCasi=new AdapterCasi(getActivity(),casisTimKiem,R.layout.layout_custom_casi_horizontal);
+        adapterCasi=new AdapterCasi(getActivity(),casisTimKiem,R.layout.layout_custom_casi_horizontal,0);
         lstTimkiemNgheSi.setHasFixedSize(true);
         lstTimkiemNgheSi.setLayoutManager(layoutManagerAlbum);
         lstTimkiemNgheSi.setAdapter(adapterCasi);

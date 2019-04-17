@@ -8,17 +8,18 @@
     android:scaleType="fitXY"
     android:id="@+id/imageview_custom_banner"
     android:layout_width="match_parent"
-    android:layout_height="260dp" />
+    android:layout_height="220dp" />
     <View
         android:background="@drawable/custom_background_banner"
         android:layout_width="match_parent"
-        android:layout_height="260dp"></View>
+        android:layout_height="220dp"></View>
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageview_custom_banner">
         <ImageView
+            android:elevation="3dp"
             android:scaleType="centerCrop"
             android:id="@+id/imageview_banner"
             android:layout_marginLeft="5dp"
@@ -28,7 +29,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp" />
         <TextView
-
+            android:elevation="3dp"
             android:textSize="18sp"
             android:textColor="#FFFF"
             android:textStyle="bold|italic"

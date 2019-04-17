@@ -31,10 +31,11 @@ public class BuilderManager {
 //    }
   public   static TextOutsideCircleButton.Builder getTextOutsideCircleButtonBuilderWithDifferentPieceColor(String s, int hinh,int mau) {
         return new TextOutsideCircleButton.Builder()
-                .normalImageRes(R.drawable.apple)
+                .normalImageRes(R.drawable.playlist)
                 .normalText(s)
                 .normalColorRes(mau)
-                .textSize(15)
+                .textSize(16)
+                .rotateImage(true)
                 .pieceColor(Color.WHITE);
     }
 //    static TextOutsideCircleButton.Builder getTextOutsideCircleButtonBuilderWithDifferentPieceColor2() {

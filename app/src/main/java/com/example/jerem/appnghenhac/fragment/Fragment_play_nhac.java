@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cleveroad.audiovisualization.AudioVisualization;
@@ -32,7 +34,7 @@ public class Fragment_play_nhac extends Fragment {
 
     CircleImageView circleImageView;
     TextView txttencasi1,txttenbaihat1;
-
+    ImageView imgdisc;
 
 
     @Nullable
@@ -42,6 +44,7 @@ public class Fragment_play_nhac extends Fragment {
         circleImageView=view.findViewById(R.id.imgCircle);
         txttenbaihat1=view.findViewById(R.id.txttenbaihat1);
         txttencasi1=view.findViewById(R.id.txttencasi1);
+        imgdisc=view.findViewById(R.id.imgdisc);
 
         RotateAnimation rotate = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setDuration(20000);
@@ -51,7 +54,8 @@ public class Fragment_play_nhac extends Fragment {
         rotate.setInterpolator(new LinearInterpolator());
 
         circleImageView.startAnimation(rotate);
-
+//        Animation firstAnimation = AnimationUtils.loadAnimation(getActivity(),R.anim.animation_scale);
+//        imgdisc.startAnimation(firstAnimation);
         return view;
     }
 

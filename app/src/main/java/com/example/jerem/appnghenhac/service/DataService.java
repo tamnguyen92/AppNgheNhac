@@ -22,17 +22,38 @@ public interface DataService {
     @GET("playlist")
     Call<List<Playlist>> Getdata_Playlist();
 
+    @GET("playlist/all")
+    Call<List<Playlist>> Getdata_PlaylistAll();
+
     @GET("chude")
     Call<List<ChuDe>> Getdata_ChuDe();
+
+    @GET("chude/all")
+    Call<List<ChuDe>> Getdata_ChuDeAll();
 
     @GET("baihat")
     Call<List<BaiHat>> Getdata_BaiHat();
 
+    @GET("baihat/luotnghe")
+    Call<List<BaiHat>> Getdata_BaiHatLuotNghe();
+
+    @GET("baihat/luotthich")
+    Call<List<BaiHat>> Getdata_BaiHatLuotThich();
+
     @GET("album")
     Call<List<Album>> Getdata_Album();
 
+    @GET("album/all")
+    Call<List<Album>> Getdata_AlbumAll();
+
+    @GET("album/luotnghe")
+    Call<List<Album>> Getdata_AlbumLuotNghe();
+
     @GET("casi")
     Call<List<CaSi>> Getdata_Casi();
+
+    @GET("casi/all")
+    Call<List<CaSi>> Getdata_CasiAll();
 
     @FormUrlEncoded
     @POST("album")

@@ -2,6 +2,7 @@ package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,10 +24,12 @@ public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
     Context context;
     ArrayList<CaSi> caSis;
     int layout;
-    public AdapterCasi(Context context, ArrayList<CaSi> caSis,int layout) {
+    int mau;
+    public AdapterCasi(Context context, ArrayList<CaSi> caSis,int layout,int mau) {
         this.context = context;
         this.caSis = caSis;
         this.layout=layout;
+        this.mau=mau;
     }
 
     @NonNull
@@ -44,7 +47,11 @@ public class AdapterCasi extends RecyclerView.Adapter<AdapterCasi.ViewHolder> {
                 .load(caSis.get(position).getHinhanhCasi().trim())
                 .into(holder.imgCircle_casi);
         holder.txttencasi_casi.setText(caSis.get(position).getTencasy());
-
+        if(mau==0){
+            holder.txttencasi_casi.setTextColor(Color.parseColor("#424242"));
+        }else {
+            holder.txttencasi_casi.setTextColor(Color.parseColor("#F5F5F5"));
+        }
         holder.frameCasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,7 +1,6 @@
 package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.jerem.appnghenhac.CallbackPlay;
@@ -52,7 +50,7 @@ public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHo
         if(position==PlayMusic2.position){
             holder.imggif.setVisibility(View.VISIBLE);
             Glide.with(context)
-                    .load(R.drawable.gif_radio)// you may not need this
+                    .load(R.drawable.gif_radio1)// you may not need this
                     .into(holder.imggif);
              holder.txtsothutu.setVisibility(View.INVISIBLE);
         }else {

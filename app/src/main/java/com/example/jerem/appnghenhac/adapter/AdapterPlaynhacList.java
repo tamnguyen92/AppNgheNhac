@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.jerem.appnghenhac.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
+import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
 
 import java.util.ArrayList;
@@ -49,12 +48,12 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
         holder.txttencasiplay.setText(baiHat.getTencasiBaihat());
         holder.txttenbaihatplay.setText(baiHat.getTenbaihat());
         holder.txtsothutu.setText(stt+"");
-        if(PlayMusic2.baiHat !=null){
-            if(baiHats.get(position).getIdBaihat()== PlayMusic2.baiHat.getIdBaihat()){
+        if(TrangChuActivity.baiHat !=null){
+            if(baiHats.get(position).getIdBaihat()== TrangChuActivity.baiHat.getIdBaihat()){
 
                 holder.imggif.setVisibility(View.VISIBLE);
                 Glide.with(context)
-                        .load(R.drawable.gif_radio)// you may not need this
+                        .load(R.drawable.gif_radio1)// you may not need this
                         .into(holder.imggif);
                 holder.txtsothutu.setVisibility(View.INVISIBLE);
 

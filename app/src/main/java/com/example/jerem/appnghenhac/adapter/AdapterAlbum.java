@@ -45,7 +45,7 @@ public class AdapterAlbum extends RecyclerView.Adapter<AdapterAlbum.ViewHolder> 
                 .into(holder.imghinhalbum);
         holder.txttenalbum.setText(albums.get(position).getTenAlbum());
         holder.txttencasialbum.setText(albums.get(position).getTencasy());
-//        holder.txtluotnghealbum.setText(albums.get(position).get()+"");
+       holder.txtluotnghealbum.setText(albums.get(position).getLuotngheAlbum()+"");
 
         holder.frame_album.setOnClickListener(new View.OnClickListener() {
             @Override

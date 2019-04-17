@@ -8,6 +8,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
@@ -24,6 +27,7 @@ import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhacList;
+import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Playlist;
@@ -56,12 +60,15 @@ QuangCao q=null;
     DataService dataService;
     String linkHinh="";
     String tentitle="";
-
+  LinearLayout linearlayouttrangchu;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach_bai_hat);
         addControll();
+        addFragment();
         init();
         getDataIntent();
 
@@ -105,6 +112,8 @@ QuangCao q=null;
         quangCaoArrayList=new ArrayList<>();
         baiHatArrayList=new ArrayList<>();
         dataService=APIService.getService();
+        linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
+        linearlayouttrangchu.setVisibility(View.GONE);
         collapsingToolbarLayout=findViewById(R.id.collapsingToolbar);
         coordinatorLayout=findViewById(R.id.coordinatorLayout);
         toolbar=findViewById(R.id.toolbardanhsach);
@@ -157,6 +166,21 @@ QuangCao q=null;
         super.onResume();
         if(adapterPlaynhac !=null){
             adapterPlaynhac.notifyDataSetChanged();
+        }
+        addFragment();
+
+    }
+
+    private void addFragment() {
+        if(TrangChuActivity.isplaying==true){
+
+            linearlayouttrangchu.setVisibility(View.VISIBLE);
+            fragmentManager =getSupportFragmentManager();
+            fragmentTransaction=fragmentManager.beginTransaction();
+            Fragment_sub_play_music fragment_sub_play_music=new Fragment_sub_play_music();
+
+            fragmentTransaction.replace(R.id.linearlayouttrangchu,fragment_sub_play_music);
+            fragmentTransaction.commit();
         }
     }
 
