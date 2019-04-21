@@ -37,7 +37,15 @@ public class AdapterAlbum extends RecyclerView.Adapter<AdapterAlbum.ViewHolder> 
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }
+    public void TimKiemAlbum(ArrayList<Album>albumTimKiem)
+    {
+        albums.clear();
+        if(albumTimKiem !=null){
 
+            albums=albumTimKiem;
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull AdapterAlbum.ViewHolder holder, final int position) {
         Picasso.with(context)

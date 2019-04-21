@@ -10,8 +10,11 @@
     android:layout_height="match_parent"
     >
     <TextView
+        android:visibility="gone"
+        android:id="@+id/txtbaihat"
+        android:layout_marginBottom="20dp"
         android:textStyle="italic"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bài Hát:"/>
@@ -22,8 +25,12 @@
         android:layout_height="wrap_content"
         ></android.support.v7.widget.RecyclerView>
     <TextView
+        android:visibility="gone"
+        android:id="@+id/txtnghesi"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:textStyle="italic"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nghệ Sĩ:"/>
@@ -32,6 +39,44 @@
         android:id="@+id/lstTimkiemNgheSi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></android.support.v7.widget.RecyclerView>
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtalbum"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="italic"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ALBUM :"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:id="@+id/lstTimkiemAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtplaylist"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="italic"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PLAYLIST :"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:id="@+id/lstTimkiemPlaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

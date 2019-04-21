@@ -41,6 +41,7 @@ public class PlayMusic2 {
         TrangChuActivity.isplaying=true;
         //baiHat=listBaihat.get(position);
         TrangChuActivity.baiHat=listBaihat.get(position);
+        Log.d("BAI HAT DANG PLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
         if(mPlayer != null){
             mPlayer.stop();
             mPlayer.reset();

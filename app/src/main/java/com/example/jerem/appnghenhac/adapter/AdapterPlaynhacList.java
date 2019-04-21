@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +49,11 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
         holder.txttencasiplay.setText(baiHat.getTencasiBaihat());
         holder.txttenbaihatplay.setText(baiHat.getTenbaihat());
         holder.txtsothutu.setText(stt+"");
-        if(TrangChuActivity.baiHat !=null){
-            if(baiHats.get(position).getIdBaihat()== TrangChuActivity.baiHat.getIdBaihat()){
 
+        if(TrangChuActivity.baiHat !=null){
+            Log.d("BAIHATDANGPLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat()+"-"+baiHats.get(position).getIdBaihat());
+            if(baiHats.get(position).getIdBaihat().intValue() == TrangChuActivity.baiHat.getIdBaihat().intValue()){
+                Log.d("BAIHATDANGPLAY", "Play:bang nhau "+TrangChuActivity.baiHat.getIdBaihat()+"-"+baiHats.get(position).getIdBaihat());
                 holder.imggif.setVisibility(View.VISIBLE);
                 Glide.with(context)
                         .load(R.drawable.gif_radio1)// you may not need this
@@ -58,7 +61,7 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
                 holder.txtsothutu.setVisibility(View.INVISIBLE);
 
             }  else {
-
+                Log.d("BAIHATDANGPLAY", "Play: khong bang nhau "+TrangChuActivity.baiHat.getIdBaihat()+"-"+baiHats.get(position).getIdBaihat());
                 holder.imggif.setImageResource(R.drawable.replay_black);
                 holder.imggif.setVisibility(View.INVISIBLE);
                 holder.txtsothutu.setVisibility(View.VISIBLE);
@@ -69,7 +72,8 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,PlayNhacActivity.class);
-                intent.putExtra("cakhuc",baiHats.get(position));
+                intent.putExtra("listcakhuc",baiHats);
+                PlayMusic2.position=position;
                 context.startActivity(intent);
             }
         });

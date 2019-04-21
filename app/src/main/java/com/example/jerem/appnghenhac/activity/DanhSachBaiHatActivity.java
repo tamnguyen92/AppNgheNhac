@@ -165,6 +165,7 @@ QuangCao q=null;
     protected void onResume() {
         super.onResume();
         if(adapterPlaynhac !=null){
+            Log.d("BAIHATDANGPLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
             adapterPlaynhac.notifyDataSetChanged();
         }
         addFragment();

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.R;
@@ -45,6 +46,7 @@ ProgressBar ProgressBarInfor;
 int dataIntent=-1;
 DataService dataService;
 ImageView imgtimkieminfor;
+TextView txttitle;
 
 ArrayList<ChuDe>chuDes;
 AdapterChuDe adapterChuDe;
@@ -78,7 +80,7 @@ String title="";
         imgtimkieminfor=findViewById(R.id.imgtimkieminfor);
         ProgressBarInfor=findViewById(R.id.ProgressBarInfor);
         ProgressBarInfor.setVisibility(View.VISIBLE);
-
+        txttitle=findViewById(R.id.txttitle);
         imgtimkieminfor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,9 +91,10 @@ String title="";
         setSupportActionBar(tool_bar_infor);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(title);
+        txttitle.setText(title);
         tool_bar_infor.setTitleTextColor(Color.WHITE);
         tool_bar_infor.setSubtitleTextColor(Color.WHITE);
-
+        tool_bar_infor.setNavigationIcon(getResources().getDrawable(R.drawable.arrow));
         tool_bar_infor.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +107,7 @@ String title="";
         Intent intent=getIntent();
         if(intent.hasExtra("chude")){
             title="Chủ Đề";
+
             dataIntent=intent.getIntExtra("chude",-1);
             if(dataIntent>=0){
                chuDes=new ArrayList<>();
@@ -221,7 +225,7 @@ String title="";
 
                 if(albums.size()>0){
                     ProgressBarInfor.setVisibility(View.INVISIBLE);
-                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,3);
+                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,2);
                     adapterAlbum=new AdapterAlbum(InforActivity.this,albums);
                     lstInfor.setHasFixedSize(true);
                     lstInfor.setLayoutManager(layoutManager);
@@ -246,7 +250,7 @@ String title="";
 
                 if(albums.size()>0){
                     ProgressBarInfor.setVisibility(View.INVISIBLE);
-                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,3);
+                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,2);
                     adapterAlbum=new AdapterAlbum(InforActivity.this,albums);
                     lstInfor.setHasFixedSize(true);
                     lstInfor.setLayoutManager(layoutManager);

@@ -80,7 +80,16 @@ public interface DataService {
     Call<List<BaiHat>> Getdata_TimKiemBaiHat(@Field("tenbaihat") String tenbaihat);
 
     @FormUrlEncoded
+    @POST("album/search")
+    Call<List<Album>> Getdata_TimKiemAlbum(@Field("tenalbum") String tenalbbum);
+
+    @FormUrlEncoded
+    @POST("playlist/search")
+    Call<List<Playlist>> Getdata_TimKiemPlaylist(@Field("tenplaylist") String tenplaylist);
+
+    @FormUrlEncoded
     @POST("casi/search")
     Call<List<CaSi>> Getdata_TimKiemCaSi(@Field("tencasi") String tencasi);
+
 
 }

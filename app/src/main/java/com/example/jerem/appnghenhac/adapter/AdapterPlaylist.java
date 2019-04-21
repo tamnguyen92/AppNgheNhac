@@ -38,7 +38,15 @@ public class AdapterPlaylist extends RecyclerView.Adapter<AdapterPlaylist.ViewHo
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }
+    public void TimKiemPlaylist(ArrayList<Playlist>playlistTimKiem)
+    {
+        playlists.clear();
+        if(playlistTimKiem !=null){
 
+            playlists=playlistTimKiem;
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull AdapterPlaylist.ViewHolder holder, final int position) {
 

@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
+import com.example.jerem.appnghenhac.activity.PlaylistActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.squareup.picasso.Picasso;
@@ -29,6 +33,7 @@ public class Fragment_sub_play_music extends Fragment {
     CircleImageView imghinhsublayout;
     TextView txttenbaihatsublayout,txttencasisublayout;
     BaiHat baiHat;
+    ImageView btnplaysub;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,13 +41,36 @@ public class Fragment_sub_play_music extends Fragment {
         addControll();
         return view;
     }
+    public void xulyPlay() {
+        if(PlayNhacActivity.isplaying==true){
+            if(PlayMusic2.mPlayer.isPlaying()){
+                btnplaysub.setImageResource(R.drawable.pause);
+            }
+        }else {
+            btnplaysub.setImageResource(R.drawable.play_button);
+        }
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+    }
 
     private void addControll() {
         linearsublayout=view.findViewById(R.id.linearsublayout);
         imghinhsublayout=view.findViewById(R.id.imghinhsublayout);
         txttenbaihatsublayout=view.findViewById(R.id.txttenbaihatsublayout);
         txttencasisublayout=view.findViewById(R.id.txttencasisublayout);
+        btnplaysub=view.findViewById(R.id.btnplaysub);
 
+        btnplaysub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((PlayNhacActivity)PlayNhacActivity.playNhacActivity).xulyPlay();
+                xulyPlay();
+            }
+        });
         linearsublayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +108,8 @@ public class Fragment_sub_play_music extends Fragment {
         }
 
     }
+
+
 
 
 }

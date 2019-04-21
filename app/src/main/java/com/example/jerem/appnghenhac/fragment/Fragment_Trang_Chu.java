@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
@@ -160,7 +161,7 @@ public class Fragment_Trang_Chu extends Fragment {
                 albums= (ArrayList<Album>) response.body();
                 Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
                 if(albums.size()>0){
-                    RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
+                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayout.HORIZONTAL,false);
                     adapterAlbum=new AdapterAlbum(getActivity(),albums);
                     lstAlbum.setHasFixedSize(true);
                     lstAlbum.setLayoutManager(layoutManager);

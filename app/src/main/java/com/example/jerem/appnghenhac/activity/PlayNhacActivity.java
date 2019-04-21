@@ -55,13 +55,14 @@ public   SeekBar seekbarsong;
   ImageView btnsuffle,btnpre,btnnext,btnrepeat;
   public static ImageView btnplay;
   Random random;
-
+public  static AppCompatActivity playNhacActivity;
     public  Runnable runnable=null;
     public  Handler handler=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_nhac);
+        playNhacActivity=this;
         StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         addControll();
@@ -280,7 +281,7 @@ public   SeekBar seekbarsong;
                 Toast.makeText(this,baiHat.getLinkBaibat().trim(), Toast.LENGTH_SHORT).show();
             }
             if(intent.hasExtra("listcakhuc")){
-                PlayMusic2.position=0;
+
                 PlayMusic2.listBaihat.clear();
                 Log.d("TAM_LOG", "====================================");
                 PlayMusic2.listBaihat=intent.getParcelableArrayListExtra("listcakhuc");
@@ -305,18 +306,7 @@ public   SeekBar seekbarsong;
              checkMode("pre");
              break;
          case R.id.btnplay:
-             if(isplaying==true){
-                 if(PlayMusic2.mPlayer.isPlaying()){
-                     btnplay.setImageResource(R.drawable.play_button);
-                     PlayMusic2.mPlayer.pause();
-                   isplaying=!isplaying;
-
-                 }
-             }else {
-                 btnplay.setImageResource(R.drawable.pause);
-                 PlayMusic2.mPlayer.start();
-                 isplaying=!isplaying;
-             }
+             xulyPlay();
              break;
          case R.id.btnnext:
              checkMode("next");
@@ -327,6 +317,21 @@ public   SeekBar seekbarsong;
              btnrepeat.setImageResource(R.drawable.replay_black);
              break;
      }
+    }
+
+    public void xulyPlay() {
+        if(isplaying==true){
+            if(PlayMusic2.mPlayer.isPlaying()){
+                btnplay.setImageResource(R.drawable.play_button);
+                PlayMusic2.mPlayer.pause();
+                isplaying=!isplaying;
+
+            }
+        }else {
+            btnplay.setImageResource(R.drawable.pause);
+            PlayMusic2.mPlayer.start();
+            isplaying=!isplaying;
+        }
     }
 
     @Override

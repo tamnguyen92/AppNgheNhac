@@ -9,7 +9,6 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/fram_danhsachbaihat"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -37,7 +36,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
 
-                    android:textAlignment="center"
+
                     android:textSize="18sp"
                     android:text="1"
                     android:layout_width="wrap_content"
@@ -46,6 +45,8 @@
             </FrameLayout>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="8"
@@ -55,6 +56,7 @@
                     android:id="@+id/txttenbaihatplay"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:fontFamily="cursive"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:text="tinh yeu doi ta alibaba gjhgjhgjhgjhgjhgh"
@@ -62,6 +64,7 @@
                     android:layout_height="wrap_content"
                    ></TextView>
                 <TextView
+                    android:fontFamily="cursive"
                     android:id="@+id/txttencasiplay"
                     android:maxLines="1"
                     android:textColor="#BDBDBD"
