@@ -14,11 +14,7 @@ import com.example.jerem.appnghenhac.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
-import com.example.jerem.appnghenhac.adapter.AdapterChuDe;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
-import com.example.jerem.appnghenhac.model.BaiHat;
-
-import java.util.ArrayList;
 
 public class Fragment_play_dansach_baihat extends Fragment implements CallbackPlay {
     View view;

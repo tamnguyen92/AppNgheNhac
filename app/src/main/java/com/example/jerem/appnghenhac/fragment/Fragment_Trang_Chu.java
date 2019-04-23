@@ -30,8 +30,10 @@ import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
+import com.example.jerem.appnghenhac.model.Object_Json;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
+import com.example.jerem.appnghenhac.model.TaiKhoan;
 import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
 
@@ -49,6 +51,9 @@ public class Fragment_Trang_Chu extends Fragment {
     ArrayList<QuangCao>Banners;
 
     Button btnclick;
+
+    Object_Json object_json;
+    TaiKhoan tk;
 
     CircleIndicator circleIndicator;
     AdapterBanner adapterBanner;
@@ -83,11 +88,16 @@ public class Fragment_Trang_Chu extends Fragment {
     ArrayList<CaSi>caSis;
     RecyclerView lstCasi;
     AdapterCasi adapterCasi;
+
+    //GOIY
+    ArrayList<BaiHat>baiHatsgoiy;
+    RecyclerView lstGoiy;
+    AdapterBaihat adapterBaihatgoiy;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.layout_frament_trang_chu,container,false);
-
+        getdataShare();
         addControll();
         getDataQuangCao();
         getDataPlaylist();
@@ -95,7 +105,37 @@ public class Fragment_Trang_Chu extends Fragment {
         getData10BaiHat();
         getDataCasi();
         getDataAlbums();
+        getDataBiHatGoiy();
         return view;
+    }
+
+    private void getdataShare() {
+        object_json=new Object_Json(getActivity());
+        tk=object_json.GetTaiKhoan();
+    }
+
+    private void getDataBiHatGoiy() {
+        Call<List<BaiHat>> callback=dataService.Getdata_BaiHatGoiy();
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                baiHatsgoiy= (ArrayList<BaiHat>) response.body();
+                Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
+                if(baiHatsgoiy.size()>0){
+                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
+                    adapterBaihatgoiy=new AdapterBaihat(getActivity(),baiHatsgoiy,R.layout.layout_custom_baihat_timkiem);
+                    lstGoiy.setHasFixedSize(true);
+                    lstGoiy.setLayoutManager(layoutManager);
+                    lstGoiy.setAdapter(adapterBaihatgoiy);
+                    adapterBaihatgoiy.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataCasi() {
@@ -124,13 +164,16 @@ public class Fragment_Trang_Chu extends Fragment {
     }
 
     private void addControll() {
+
         caSis=new ArrayList<>();
         Banners=new ArrayList<>();
         playlists=new ArrayList<>();
         chuDes=new ArrayList<>();
         baiHats=new ArrayList<>();
         albums=new ArrayList<>();
+        baiHatsgoiy=new ArrayList<>();
 
+        lstGoiy=view.findViewById(R.id.lstGoiy);
         lstPlaylist=view.findViewById(R.id.lstPlaylist);
         lstchude=view.findViewById(R.id.lstChude);
         lstBaiHat=view.findViewById(R.id.lstBaiHat);

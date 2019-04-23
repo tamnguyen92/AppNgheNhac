@@ -260,6 +260,49 @@
             android:layout_height="wrap_content"
             android:text="click vao nha"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_margin="2dp"
+                android:background="#FFFF00"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                ></View>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="2dp"
+                android:textStyle="italic|bold"
+                android:textSize="20sp"
+                android:fontFamily="casual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Các ca khúc gợi ý cho bạn :"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstGoiy"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnclick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="click vao nha"/>
+    </LinearLayout>
 
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -17,20 +17,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TrangChuActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.TrangChuActivity"></activity>
         <activity android:name=".activity.PlayNhacActivity" />
         <activity android:name=".activity.ExamActivity" />
         <activity android:name=".activity.DanhSachBaiHatActivity" />
         <activity android:name=".activity.PlaylistActivity" />
         <activity android:name=".activity.CaSiActivity" />
         <activity android:name=".activity.InforActivity" />
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.UserActivity"></activity>
     </application>
 
 </manifest>

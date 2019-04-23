@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:fontFamily="cursive"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="tâm sự người hát nhạc buồn"
@@ -64,19 +64,35 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3">
                 <ImageView
-                    android:padding="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/btnpresub"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/back_black"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+                <ImageView
+
                     android:layout_marginTop="2dp"
                     android:id="@+id/btnplaysub"
                     android:scaleType="centerInside"
                     android:src="@drawable/pause"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp" />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <ImageView
+                   android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/btnnextsub"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/next_black"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
             </LinearLayout>
         </LinearLayout>
    <View

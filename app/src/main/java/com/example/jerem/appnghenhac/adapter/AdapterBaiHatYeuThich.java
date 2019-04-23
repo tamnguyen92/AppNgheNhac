@@ -19,20 +19,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder> {
+public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeuThich.ViewHolder>  {
     Context context;
-    ArrayList<BaiHat>baiHats;
+    ArrayList<BaiHat> baiHats;
     int layout;
-    public AdapterBaihat(Context context, ArrayList<BaiHat> baiHats, int layout) {
+    public AdapterBaiHatYeuThich(Context context, ArrayList<BaiHat> baiHats, int layout) {
         this.context = context;
         this.baiHats = baiHats;
         this.layout=layout;
     }
-
     @NonNull
-
     @Override
-    public AdapterBaihat.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterBaiHatYeuThich.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(layout,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
@@ -40,7 +38,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterBaihat.ViewHolder holder, final int positions) {
+    public void onBindViewHolder(@NonNull AdapterBaiHatYeuThich.ViewHolder holder, final int positions) {
         Log.d("VITRI", "onClick: ten"+baiHats.get(positions).getTenbaihat());
         Picasso.with(context)
                 .load(baiHats.get(positions).getHinhanhBaihat().trim())
@@ -48,7 +46,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
         holder.txttenbaihat.setText(baiHats.get(positions).getTenbaihat());
         holder.txttencasi.setText(baiHats.get(positions).getTencasiBaihat());
         holder.txtluotnghe.setText(baiHats.get(positions).getLuotngheBaihat()+"");
-
+        holder.imgdowloard.setVisibility(View.VISIBLE);
         holder.frame_baihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,31 +57,20 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
             }
         });
     }
-public void TimKiemBaiHat(ArrayList<BaiHat>baiHatsTimKiem)
-{
-    baiHats.clear();
-    if(baiHatsTimKiem !=null){
 
-        baiHats=baiHatsTimKiem;
-        for(BaiHat b : baiHats){
-            Log.d("VITRI", "onClick: ten"+b.getTenbaihat());
-        }
-        notifyDataSetChanged();
-    }
-}
     @Override
     public int getItemCount() {
         return baiHats.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //imghinhbaihat txttenbaihat txttencasi frame_baihat,txtluotnghe
-        ImageView imghinhbaihat;
+        ImageView imghinhbaihat,imgdowloard;
         TextView txttenbaihat,txttencasi,txtluotnghe;
         FrameLayout frame_baihat;
         public ViewHolder(View itemView) {
             super(itemView);
             imghinhbaihat=itemView.findViewById(R.id.imghinhbaihat);
+            imgdowloard=itemView.findViewById(R.id.imgdowloard);
             txttenbaihat=itemView.findViewById(R.id.txttenbaihat);
             txttencasi=itemView.findViewById(R.id.txttencasi);
             txtluotnghe=itemView.findViewById(R.id.txtluotnghe);

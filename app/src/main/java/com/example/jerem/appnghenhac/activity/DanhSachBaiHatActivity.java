@@ -1,10 +1,7 @@
 package com.example.jerem.appnghenhac.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,12 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
-import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
-import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhacList;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.Album;
@@ -36,9 +28,6 @@ import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,7 +154,7 @@ QuangCao q=null;
     protected void onResume() {
         super.onResume();
         if(adapterPlaynhac !=null){
-            Log.d("BAIHATDANGPLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
+        //    Log.d("BAIHATDANGPLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
             adapterPlaynhac.notifyDataSetChanged();
         }
         addFragment();
@@ -192,8 +181,7 @@ QuangCao q=null;
           int vitri=intent.getIntExtra("position",-1);
           if(vitri>=0){
               q=quangCaoArrayList.get(vitri);
-
-                  BaiHat baiHat=new BaiHat(q.getIdBaihat(), q.getTenbaihat(),q.getHinhanhBaihat(),q.getLinkBaibat(),q.getIdCasiBaihat(),q.getIdAlbumBaihat(), q.getIdPlaylistBaihat(),q.getLuotthichBaihat(),q.getLuotngheBaihat(),q.getTencasiBaihat());
+                  BaiHat baiHat=new BaiHat(q.getIdBaihat(), q.getTenbaihat(),q.getHinhanhBaihat(),q.getLinkBaibat(),q.getIdCasiBaihat(),q.getIdAlbumBaihat(), q.getIdPlaylistBaihat(),q.getLuotthichBaihat(),q.getLuotngheBaihat(),"0",q.getTencasiBaihat());
                   baiHatArrayList.add(baiHat);
 
 

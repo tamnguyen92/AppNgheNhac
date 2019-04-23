@@ -6,22 +6,19 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.AudioVisualization;
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
 import com.example.jerem.appnghenhac.CallbackPlay;
 import com.example.jerem.appnghenhac.R;
-import com.example.jerem.appnghenhac.activity.ExamActivity;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
-import com.example.jerem.appnghenhac.fragment.Fragment_play_nhac;
+import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.BaiHat;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayMusic2 {
     public static MediaPlayer mPlayer;
@@ -41,7 +38,10 @@ public class PlayMusic2 {
         TrangChuActivity.isplaying=true;
         //baiHat=listBaihat.get(position);
         TrangChuActivity.baiHat=listBaihat.get(position);
-        Log.d("BAI HAT DANG PLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
+        if(Fragment_sub_play_music.fragment_sub_play_music!=null){
+            ((Fragment_sub_play_music)Fragment_sub_play_music.fragment_sub_play_music).CapnhatLayout();
+        }
+        Log.d("BAI_HAT_DANG_PLAY", "Play: "+TrangChuActivity.baiHat.getIdBaihat());
         if(mPlayer != null){
             mPlayer.stop();
             mPlayer.reset();
@@ -65,7 +65,17 @@ public class PlayMusic2 {
                     startplaying=true;
 
                     Log.d("LOG_TAM", "Play:start "+mPlayer.getDuration());
-                    totalTimeLengthInMilliseconds = mPlayer.getDuration();
+                    if(mPlayer.getDuration() == -1){
+                         double thoigian= Double.parseDouble(TrangChuActivity.baiHat.getThoigian());
+                         int phut=(int)thoigian%10;
+                         int giay= (int) (thoigian*100 - phut*100);
+                        Log.d("THOIGIAN",thoigian+" phut"+"="+phut+" giay "+giay);
+                        totalTimeLengthInMilliseconds = (phut*60 + giay)*1000;
+
+                    }else {
+                        totalTimeLengthInMilliseconds = mPlayer.getDuration();
+                    }
+
                     if(txtviewtongtimesong!=null){
                         txtviewtongtimesong.setText(PlayMusic2.simpleDateFormat.format(PlayMusic2.totalTimeLengthInMilliseconds));
                     }
@@ -89,15 +99,22 @@ public class PlayMusic2 {
                 public void onBufferingUpdate(MediaPlayer mp, int percent) {
                     Log.e("onBufferingUpdate", "" + percent);
                     if(startplaying){
-                        bufferingUpdate=(int)percent*mPlayer.getDuration()/100;
-                        if(PlayNhacActivity.btnplay !=null){
-                            if(percent >15){
-                                PlayNhacActivity.btnplay.setImageResource(R.drawable.pause);
+                        if(mPlayer.getDuration()==-1){
+                            if(seekBar!=null){
+                                seekBar.setSecondaryProgress(totalTimeLengthInMilliseconds);
+                            }
+                        }else {
+                            bufferingUpdate=(int)percent*mPlayer.getDuration()/100;
+                            if(PlayNhacActivity.btnplay !=null){
+                                if(percent >15){
+                                    PlayNhacActivity.btnplay.setImageResource(R.drawable.pause_white);
+                                }
+                            }
+                            if(seekBar!=null){
+                                seekBar.setSecondaryProgress(bufferingUpdate);
                             }
                         }
-                        if(seekBar!=null){
-                            seekBar.setSecondaryProgress(bufferingUpdate);
-                        }
+
                     }
 
                 }

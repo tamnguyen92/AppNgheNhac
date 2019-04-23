@@ -2,7 +2,6 @@ package com.example.jerem.appnghenhac.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.view.ViewPager;
@@ -12,31 +11,24 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cleveroad.audiovisualization.AudioVisualization;
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
 import com.example.jerem.appnghenhac.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
-import com.example.jerem.appnghenhac.PlayMusic.PlayMusics;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterViewPageListNhac;
-import com.example.jerem.appnghenhac.fragment.Fragment_Trang_Chu;
 import com.example.jerem.appnghenhac.fragment.Fragment_play_dansach_baihat;
 import com.example.jerem.appnghenhac.fragment.Fragment_play_nhac;
 import com.example.jerem.appnghenhac.model.BaiHat;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static com.example.jerem.appnghenhac.PlayMusic.PlayMusic2.mPlayer;
 import static com.example.jerem.appnghenhac.PlayMusic.PlayMusic2.simpleDateFormat;
-import static com.example.jerem.appnghenhac.PlayMusic.PlayMusics.seekBar;
 
 public class PlayNhacActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener,SeekBar.OnSeekBarChangeListener,CallbackPlay {
 BaiHat baiHat;
@@ -77,6 +69,7 @@ public  static AppCompatActivity playNhacActivity;
         Fragment_play_dansach_baihat.adapterPlaynhac.notifyDataSetChanged();
         eventClick();
     }
+
     public void playNhac() {
 
         if(intent.hasExtra("hello")){
@@ -86,11 +79,8 @@ public  static AppCompatActivity playNhacActivity;
             primarySeekBarProgressUpdater();
             Fragment_play_dansach_baihat.adapterPlaynhac.notifyDataSetChanged();
             eventClick();
-            if(PlayMusic2.mPlayer.isPlaying()){
-                btnplay.setImageResource(R.drawable.pause);
-            }else {
-                btnplay.setImageResource(R.drawable.play_button);
-            }
+            showButton();
+
         }
         if(intent.hasExtra("cakhuc") || intent.hasExtra("listcakhuc")){
             if(PlayMusic2.listBaihat.size()>0)
@@ -116,6 +106,25 @@ public  static AppCompatActivity playNhacActivity;
 //            }
 //        });
 
+    }
+
+    private void showButton() {
+        if(PlayMusic2.mPlayer.isPlaying()){
+            btnplay.setImageResource(R.drawable.pause_white);
+        }else {
+            btnplay.setImageResource(R.drawable.play_button_white);
+        }
+
+        if(PlayMusic2.modePlay==1){
+            btnsuffle.setImageResource(R.drawable.shuffle_white);
+            btnrepeat.setImageResource(R.drawable.replay_black);
+        } if(PlayMusic2.modePlay==2){
+            btnsuffle.setImageResource(R.drawable.shuffle_black);
+            btnrepeat.setImageResource(R.drawable.replay_white);
+        }if(PlayMusic2.modePlay==0){
+            btnsuffle.setImageResource(R.drawable.shuffle_white);
+            btnrepeat.setImageResource(R.drawable.replay_white);
+        }
     }
 
     public void huytientrinh(){
@@ -303,13 +312,13 @@ public  static AppCompatActivity playNhacActivity;
              PlayMusic2.modePlay=2;
              break;
          case R.id.btnpre:
-             checkMode("pre");
+             xulypre();
              break;
          case R.id.btnplay:
              xulyPlay();
              break;
          case R.id.btnnext:
-             checkMode("next");
+             xulynext();
              break;
          case R.id.btnrepeat:
             PlayMusic2.modePlay=1;
@@ -322,16 +331,22 @@ public  static AppCompatActivity playNhacActivity;
     public void xulyPlay() {
         if(isplaying==true){
             if(PlayMusic2.mPlayer.isPlaying()){
-                btnplay.setImageResource(R.drawable.play_button);
+                btnplay.setImageResource(R.drawable.play_button_white);
                 PlayMusic2.mPlayer.pause();
                 isplaying=!isplaying;
 
             }
         }else {
-            btnplay.setImageResource(R.drawable.pause);
+            btnplay.setImageResource(R.drawable.pause_white);
             PlayMusic2.mPlayer.start();
             isplaying=!isplaying;
         }
+    }
+    public void xulynext(){
+        checkMode("next");
+    }
+    public void xulypre(){
+        checkMode("pre");
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
+import com.example.jerem.appnghenhac.model.TaiKhoan;
 
 import java.util.List;
 
@@ -33,6 +34,9 @@ public interface DataService {
 
     @GET("baihat")
     Call<List<BaiHat>> Getdata_BaiHat();
+
+    @GET("baihat/goiy")
+    Call<List<BaiHat>> Getdata_BaiHatGoiy();
 
     @GET("baihat/luotnghe")
     Call<List<BaiHat>> Getdata_BaiHatLuotNghe();
@@ -62,6 +66,14 @@ public interface DataService {
     @FormUrlEncoded
     @POST("playlist")
     Call<List<BaiHat>> Getdata_BaiHatTheoPlaylist(@Field("idplaylist") int idplaylist);
+
+    @FormUrlEncoded
+    @POST("taikhoan/login")
+    Call<List<TaiKhoan>> Login(@Field("username") String username,@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("taikhoan/baihat")
+    Call<List<BaiHat>>Getdata_BaiHatYeuThich (@Field("mataikhoan") int mataikhoan);
 
     @FormUrlEncoded
     @POST("playlist/theochude")

@@ -35,6 +35,9 @@ private Integer luotthichBaihat;
 @SerializedName("luotnghe_baihat")
 @Expose
 private Integer luotngheBaihat;
+@SerializedName("thoigian")
+@Expose
+private String thoigian;
 @SerializedName("tencasi_baihat")
 @Expose
 private String tencasiBaihat;
@@ -73,6 +76,7 @@ private String tencasiBaihat;
         } else {
             luotngheBaihat = in.readInt();
         }
+        thoigian = in.readString();
         tencasiBaihat = in.readString();
     }
 
@@ -144,7 +148,21 @@ public void setIdPlaylistBaihat(Integer idPlaylistBaihat) {
 this.idPlaylistBaihat = idPlaylistBaihat;
 }
 
-public Integer getLuotthichBaihat() {
+    public BaiHat(Integer idBaihat, String tenbaihat, String hinhanhBaihat, String linkBaibat, Integer idCasiBaihat, Integer idAlbumBaihat, Integer idPlaylistBaihat, Integer luotthichBaihat, Integer luotngheBaihat, String thoigian, String tencasiBaihat) {
+        this.idBaihat = idBaihat;
+        this.tenbaihat = tenbaihat;
+        this.hinhanhBaihat = hinhanhBaihat;
+        this.linkBaibat = linkBaibat;
+        this.idCasiBaihat = idCasiBaihat;
+        this.idAlbumBaihat = idAlbumBaihat;
+        this.idPlaylistBaihat = idPlaylistBaihat;
+        this.luotthichBaihat = luotthichBaihat;
+        this.luotngheBaihat = luotngheBaihat;
+        this.thoigian = thoigian;
+        this.tencasiBaihat = tencasiBaihat;
+    }
+
+    public Integer getLuotthichBaihat() {
 return luotthichBaihat;
 }
 
@@ -158,6 +176,14 @@ return luotngheBaihat;
 
 public void setLuotngheBaihat(Integer luotngheBaihat) {
 this.luotngheBaihat = luotngheBaihat;
+}
+
+public String getThoigian() {
+return thoigian;
+}
+
+public void setThoigian(String thoigian) {
+this.thoigian = thoigian;
 }
 
 public String getTencasiBaihat() {
@@ -214,19 +240,7 @@ this.tencasiBaihat = tencasiBaihat;
             dest.writeByte((byte) 1);
             dest.writeInt(luotngheBaihat);
         }
+        dest.writeString(thoigian);
         dest.writeString(tencasiBaihat);
-    }
-
-    public BaiHat(Integer idBaihat, String tenbaihat, String hinhanhBaihat, String linkBaibat, Integer idCasiBaihat, Integer idAlbumBaihat, Integer idPlaylistBaihat, Integer luotthichBaihat, Integer luotngheBaihat, String tencasiBaihat) {
-        this.idBaihat = idBaihat;
-        this.tenbaihat = tenbaihat;
-        this.hinhanhBaihat = hinhanhBaihat;
-        this.linkBaibat = linkBaibat;
-        this.idCasiBaihat = idCasiBaihat;
-        this.idAlbumBaihat = idAlbumBaihat;
-        this.idPlaylistBaihat = idPlaylistBaihat;
-        this.luotthichBaihat = luotthichBaihat;
-        this.luotngheBaihat = luotngheBaihat;
-        this.tencasiBaihat = tencasiBaihat;
     }
 }
