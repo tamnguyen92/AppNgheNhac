@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.AudioVisualization;
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
@@ -13,12 +14,15 @@ import com.example.jerem.appnghenhac.CallbackPlay;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
+import com.example.jerem.appnghenhac.activity.UserActivity;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.Object_Json;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayMusic2 {
     public static MediaPlayer mPlayer;
@@ -32,9 +36,11 @@ public class PlayMusic2 {
     public static boolean startplaying=false;
     public static AudioVisualization audioVisualization=null;
     public static VisualizerDbmHandler handlerVisualizer=null;
+   public static Object_Json object_json;
 //    public static  CallbackPlay callbackPlay;
 
     public static void Play(final String url, final SeekBar seekBar, final TextView txtviewtongtimesong, final CallbackPlay callbackPlay, final Context context){
+        object_json =new Object_Json(context);
         TrangChuActivity.isplaying=true;
         //baiHat=listBaihat.get(position);
         TrangChuActivity.baiHat=listBaihat.get(position);
@@ -119,9 +125,37 @@ public class PlayMusic2 {
 
                 }
             });
+            xulythembaihatLichSu(listBaihat.get(position));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static void xulythembaihatLichSu(BaiHat baiHat) {
+        if(Object_Json.dsBaiHatLichSu.size()== 50){
+            Object_Json.dsBaiHatLichSu.remove(49);
+        }else {
+            if(Object_Json.dsBaiHatLichSu.size()>2){
+                int index=Object_Json.dsBaiHatLichSu.size()-1;
+                if(Object_Json.dsBaiHatLichSu.get(0).getIdBaihat().intValue()== baiHat.getIdBaihat().intValue()){
+
+                }else {
+                    Collections.reverse(Object_Json.dsBaiHatLichSu);
+                    Object_Json.dsBaiHatLichSu.add(baiHat);
+                    Collections.reverse(Object_Json.dsBaiHatLichSu);
+                    object_json.SaveBaiHatLichsu( Object_Json.dsBaiHatLichSu);
+                    Log.d("xulythembaihatLichSu", "xulythembaihatLichSu: "+Object_Json.dsBaiHatLichSu.size());
+                }
+
+            }else {
+                Collections.reverse(Object_Json.dsBaiHatLichSu);
+                Object_Json.dsBaiHatLichSu.add(baiHat);
+                Collections.reverse(Object_Json.dsBaiHatLichSu);
+                object_json.SaveBaiHatLichsu( Object_Json.dsBaiHatLichSu);
+                Log.d("xulythembaihatLichSu", "xulythembaihatLichSu: "+Object_Json.dsBaiHatLichSu.size());
+            }
+
+        }
     }
 }

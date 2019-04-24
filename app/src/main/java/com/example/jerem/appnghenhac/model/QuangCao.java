@@ -11,48 +11,51 @@ import com.google.gson.annotations.SerializedName;
 
 public class QuangCao implements Parcelable {
 
-@SerializedName("id_quangcao")
-@Expose
-private Integer idQuangcao;
-@SerializedName("hinh_quangcao")
-@Expose
-private String hinhQuangcao;
-@SerializedName("id_baihat_quangcao")
-@Expose
-private Integer idBaihatQuangcao;
-@SerializedName("noidung_quangcao")
-@Expose
-private Object noidungQuangcao;
-@SerializedName("id_baihat")
-@Expose
-private Integer idBaihat;
-@SerializedName("tenbaihat")
-@Expose
-private String tenbaihat;
-@SerializedName("hinhanh_baihat")
-@Expose
-private String hinhanhBaihat;
-@SerializedName("link_baibat")
-@Expose
-private String linkBaibat;
-@SerializedName("id_casi_baihat")
-@Expose
-private Integer idCasiBaihat;
-@SerializedName("id_album_baihat")
-@Expose
-private Integer idAlbumBaihat;
-@SerializedName("id_playlist_baihat")
-@Expose
-private Integer idPlaylistBaihat;
-@SerializedName("luotthich_baihat")
-@Expose
-private Integer luotthichBaihat;
-@SerializedName("luotnghe_baihat")
-@Expose
-private Integer luotngheBaihat;
-@SerializedName("tencasi_baihat")
-@Expose
-private String tencasiBaihat;
+    @SerializedName("id_quangcao")
+    @Expose
+    private Integer idQuangcao;
+    @SerializedName("hinh_quangcao")
+    @Expose
+    private String hinhQuangcao;
+    @SerializedName("id_baihat_quangcao")
+    @Expose
+    private Integer idBaihatQuangcao;
+    @SerializedName("noidung_quangcao")
+    @Expose
+    private Object noidungQuangcao;
+    @SerializedName("id_baihat")
+    @Expose
+    private Integer idBaihat;
+    @SerializedName("tenbaihat")
+    @Expose
+    private String tenbaihat;
+    @SerializedName("hinhanh_baihat")
+    @Expose
+    private String hinhanhBaihat;
+    @SerializedName("link_baibat")
+    @Expose
+    private String linkBaibat;
+    @SerializedName("id_casi_baihat")
+    @Expose
+    private Integer idCasiBaihat;
+    @SerializedName("id_album_baihat")
+    @Expose
+    private Integer idAlbumBaihat;
+    @SerializedName("id_playlist_baihat")
+    @Expose
+    private Integer idPlaylistBaihat;
+    @SerializedName("luotthich_baihat")
+    @Expose
+    private Integer luotthichBaihat;
+    @SerializedName("luotnghe_baihat")
+    @Expose
+    private Integer luotngheBaihat;
+    @SerializedName("thoigian")
+    @Expose
+    private String thoigian;
+    @SerializedName("tencasi_baihat")
+    @Expose
+    private String tencasiBaihat;
 
     protected QuangCao(Parcel in) {
         if (in.readByte() == 0) {
@@ -99,6 +102,7 @@ private String tencasiBaihat;
         } else {
             luotngheBaihat = in.readInt();
         }
+        thoigian = in.readString();
         tencasiBaihat = in.readString();
     }
 
@@ -115,116 +119,124 @@ private String tencasiBaihat;
     };
 
     public Integer getIdQuangcao() {
-return idQuangcao;
-}
+        return idQuangcao;
+    }
 
-public void setIdQuangcao(Integer idQuangcao) {
-this.idQuangcao = idQuangcao;
-}
+    public void setIdQuangcao(Integer idQuangcao) {
+        this.idQuangcao = idQuangcao;
+    }
 
-public String getHinhQuangcao() {
-return hinhQuangcao;
-}
+    public String getHinhQuangcao() {
+        return hinhQuangcao;
+    }
 
-public void setHinhQuangcao(String hinhQuangcao) {
-this.hinhQuangcao = hinhQuangcao;
-}
+    public void setHinhQuangcao(String hinhQuangcao) {
+        this.hinhQuangcao = hinhQuangcao;
+    }
 
-public Integer getIdBaihatQuangcao() {
-return idBaihatQuangcao;
-}
+    public Integer getIdBaihatQuangcao() {
+        return idBaihatQuangcao;
+    }
 
-public void setIdBaihatQuangcao(Integer idBaihatQuangcao) {
-this.idBaihatQuangcao = idBaihatQuangcao;
-}
+    public void setIdBaihatQuangcao(Integer idBaihatQuangcao) {
+        this.idBaihatQuangcao = idBaihatQuangcao;
+    }
 
-public Object getNoidungQuangcao() {
-return noidungQuangcao;
-}
+    public Object getNoidungQuangcao() {
+        return noidungQuangcao;
+    }
 
-public void setNoidungQuangcao(Object noidungQuangcao) {
-this.noidungQuangcao = noidungQuangcao;
-}
+    public void setNoidungQuangcao(Object noidungQuangcao) {
+        this.noidungQuangcao = noidungQuangcao;
+    }
 
-public Integer getIdBaihat() {
-return idBaihat;
-}
+    public Integer getIdBaihat() {
+        return idBaihat;
+    }
 
-public void setIdBaihat(Integer idBaihat) {
-this.idBaihat = idBaihat;
-}
+    public void setIdBaihat(Integer idBaihat) {
+        this.idBaihat = idBaihat;
+    }
 
-public String getTenbaihat() {
-return tenbaihat;
-}
+    public String getTenbaihat() {
+        return tenbaihat;
+    }
 
-public void setTenbaihat(String tenbaihat) {
-this.tenbaihat = tenbaihat;
-}
+    public void setTenbaihat(String tenbaihat) {
+        this.tenbaihat = tenbaihat;
+    }
 
-public String getHinhanhBaihat() {
-return hinhanhBaihat;
-}
+    public String getHinhanhBaihat() {
+        return hinhanhBaihat;
+    }
 
-public void setHinhanhBaihat(String hinhanhBaihat) {
-this.hinhanhBaihat = hinhanhBaihat;
-}
+    public void setHinhanhBaihat(String hinhanhBaihat) {
+        this.hinhanhBaihat = hinhanhBaihat;
+    }
 
-public String getLinkBaibat() {
-return linkBaibat;
-}
+    public String getLinkBaibat() {
+        return linkBaibat;
+    }
 
-public void setLinkBaibat(String linkBaibat) {
-this.linkBaibat = linkBaibat;
-}
+    public void setLinkBaibat(String linkBaibat) {
+        this.linkBaibat = linkBaibat;
+    }
 
-public Integer getIdCasiBaihat() {
-return idCasiBaihat;
-}
+    public Integer getIdCasiBaihat() {
+        return idCasiBaihat;
+    }
 
-public void setIdCasiBaihat(Integer idCasiBaihat) {
-this.idCasiBaihat = idCasiBaihat;
-}
+    public void setIdCasiBaihat(Integer idCasiBaihat) {
+        this.idCasiBaihat = idCasiBaihat;
+    }
 
-public Integer getIdAlbumBaihat() {
-return idAlbumBaihat;
-}
+    public Integer getIdAlbumBaihat() {
+        return idAlbumBaihat;
+    }
 
-public void setIdAlbumBaihat(Integer idAlbumBaihat) {
-this.idAlbumBaihat = idAlbumBaihat;
-}
+    public void setIdAlbumBaihat(Integer idAlbumBaihat) {
+        this.idAlbumBaihat = idAlbumBaihat;
+    }
 
-public Integer getIdPlaylistBaihat() {
-return idPlaylistBaihat;
-}
+    public Integer getIdPlaylistBaihat() {
+        return idPlaylistBaihat;
+    }
 
-public void setIdPlaylistBaihat(Integer idPlaylistBaihat) {
-this.idPlaylistBaihat = idPlaylistBaihat;
-}
+    public void setIdPlaylistBaihat(Integer idPlaylistBaihat) {
+        this.idPlaylistBaihat = idPlaylistBaihat;
+    }
 
-public Integer getLuotthichBaihat() {
-return luotthichBaihat;
-}
+    public Integer getLuotthichBaihat() {
+        return luotthichBaihat;
+    }
 
-public void setLuotthichBaihat(Integer luotthichBaihat) {
-this.luotthichBaihat = luotthichBaihat;
-}
+    public void setLuotthichBaihat(Integer luotthichBaihat) {
+        this.luotthichBaihat = luotthichBaihat;
+    }
 
-public Integer getLuotngheBaihat() {
-return luotngheBaihat;
-}
+    public Integer getLuotngheBaihat() {
+        return luotngheBaihat;
+    }
 
-public void setLuotngheBaihat(Integer luotngheBaihat) {
-this.luotngheBaihat = luotngheBaihat;
-}
+    public void setLuotngheBaihat(Integer luotngheBaihat) {
+        this.luotngheBaihat = luotngheBaihat;
+    }
 
-public String getTencasiBaihat() {
-return tencasiBaihat;
-}
+    public String getThoigian() {
+        return thoigian;
+    }
 
-public void setTencasiBaihat(String tencasiBaihat) {
-this.tencasiBaihat = tencasiBaihat;
-}
+    public void setThoigian(String thoigian) {
+        this.thoigian = thoigian;
+    }
+
+    public String getTencasiBaihat() {
+        return tencasiBaihat;
+    }
+
+    public void setTencasiBaihat(String tencasiBaihat) {
+        this.tencasiBaihat = tencasiBaihat;
+    }
 
     @Override
     public int describeContents() {
@@ -285,6 +297,7 @@ this.tencasiBaihat = tencasiBaihat;
             dest.writeByte((byte) 1);
             dest.writeInt(luotngheBaihat);
         }
+        dest.writeString(thoigian);
         dest.writeString(tencasiBaihat);
     }
 }

@@ -26,6 +26,9 @@ public class Album implements Parcelable{
     @SerializedName("id_theloai_album")
     @Expose
     private Integer idTheloaiAlbum;
+    @SerializedName("luotthich_album")
+    @Expose
+    private Integer luotthichAlbum;
     @SerializedName("id_casi")
     @Expose
     private Integer idCasi;
@@ -61,6 +64,11 @@ public class Album implements Parcelable{
             idTheloaiAlbum = null;
         } else {
             idTheloaiAlbum = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            luotthichAlbum = null;
+        } else {
+            luotthichAlbum = in.readInt();
         }
         if (in.readByte() == 0) {
             idCasi = null;
@@ -132,6 +140,14 @@ public class Album implements Parcelable{
         this.idTheloaiAlbum = idTheloaiAlbum;
     }
 
+    public Integer getLuotthichAlbum() {
+        return luotthichAlbum;
+    }
+
+    public void setLuotthichAlbum(Integer luotthichAlbum) {
+        this.luotthichAlbum = luotthichAlbum;
+    }
+
     public Integer getIdCasi() {
         return idCasi;
     }
@@ -196,6 +212,12 @@ public class Album implements Parcelable{
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(idTheloaiAlbum);
+        }
+        if (luotthichAlbum == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(luotthichAlbum);
         }
         if (idCasi == null) {
             dest.writeByte((byte) 0);

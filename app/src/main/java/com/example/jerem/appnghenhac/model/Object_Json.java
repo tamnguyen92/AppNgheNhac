@@ -12,6 +12,8 @@ import com.google.gson.reflect.TypeToken;
 public class Object_Json {
     public Context context;
     public static ArrayList<BaiHat>dsBaiHatYeuThich=new ArrayList<>();
+    public static ArrayList<BaiHat>dsBaiHatLichSu=new ArrayList<>();
+    public static ArrayList<Album>dsAlbumYeuThich=new ArrayList<>();
     public Object_Json(Context context) {
         this.context = context;
     }
@@ -44,14 +46,64 @@ public class Object_Json {
         editor.putString("dsbaihat",json);
         editor.apply();
     }
-    public void BaiHatYeuThich()
+    public void SaveAlbumYeuThich(List<Album> dsalbum)
     {
-        dsBaiHatYeuThich.clear();
-        SharedPreferences sharedPreferences=context.getSharedPreferences("baihatyeuthich",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences=context.getSharedPreferences("albumyeuthich",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
         Gson gson=new Gson();
-        String json=sharedPreferences.getString("dsbaihat",null);
-        Type type=new TypeToken<ArrayList<BaiHat>>(){}.getType();
-        dsBaiHatYeuThich=gson.fromJson(json,type);
+        String json=gson.toJson(dsalbum);
+        editor.putString("dsalbum",json);
+        editor.apply();
+    }
+    public void SaveBaiHatLichsu(ArrayList<BaiHat> dsbaihat)
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("baihatlichsu",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(dsbaihat);
+        editor.putString("dsbaihatlichsu",json);
+        editor.apply();
+    }
+    public ArrayList<BaiHat> GetBaiHatLichsu()
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("baihatlichsu",Context.MODE_PRIVATE);
+        Gson gson=new Gson();
+        String json="";
+        json=sharedPreferences.getString("dsbaihatlichsu",null);
+        if(json!=null){
+            Type type=new TypeToken<ArrayList<BaiHat>>(){}.getType();
+            dsBaiHatLichSu=gson.fromJson(json,type);
+            return dsBaiHatLichSu;
+        }
+        return dsBaiHatLichSu;
+
+    }
+
+    public static boolean checkTonTai(int loai,int id){
+        if(loai==0){
+            if( Object_Json.dsBaiHatYeuThich.size()>0){
+                for (BaiHat b : Object_Json.dsBaiHatYeuThich){
+                    if(b.getIdBaihat().intValue()==id){
+                        return true;
+                    }
+                }
+                return false;
+            }else {
+                return false;
+            }
+
+        }else {
+            if( Object_Json.dsAlbumYeuThich.size()>0){
+                for (Album b : Object_Json.dsAlbumYeuThich){
+                    if(b.getIdAlbum().intValue()==id){
+                        return true;
+                    }
+                }
+                return false;
+            }else {
+                return false;
+            }
+        }
     }
 
 }

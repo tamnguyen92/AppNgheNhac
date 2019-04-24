@@ -40,6 +40,9 @@ public Object_Json object_json=new Object_Json(this);
         taiKhoans=new ArrayList<>();
         txtpassword=findViewById(R.id.txtpassword);
         txtusername=findViewById(R.id.txtusername);
+
+        txtpassword.setText("tam123");
+        txtusername.setText("tam123");
         btnlogin=findViewById(R.id.btnlogin);
 
         btnlogin.setOnClickListener(this);

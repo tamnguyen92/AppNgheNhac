@@ -74,6 +74,22 @@
                 android:layout_height="wrap_content"
                 android:text="12"/>
         </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/imglove"
+                android:src="@drawable/iconlove"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
 
     </FrameLayout>
 

@@ -14,16 +14,22 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_weight="1"
-                android:id="@+id/imghinhbaihat"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
             <LinearLayout
-                android:layout_weight="8"
-                android:layout_width="wrap_content"
+                android:layout_weight="1.5"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imghinhbaihat"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="7.5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
@@ -50,14 +56,18 @@
                     android:layout_height="wrap_content"
                     android:text="tâm sự "/>
             </LinearLayout>
-         <ImageView
-             android:visibility="gone"
-             android:id="@+id/imgdowloard"
-             android:layout_gravity="center"
-             android:layout_weight="1"
-             android:src="@drawable/next_black"
-             android:layout_width="30dp"
-             android:layout_height="30dp" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imglove"
+                    android:src="@drawable/iconlove"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:visibility="gone"

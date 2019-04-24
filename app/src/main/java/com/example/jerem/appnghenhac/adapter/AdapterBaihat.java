@@ -11,22 +11,35 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
+import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.Object_Json;
+import com.example.jerem.appnghenhac.model.Result;
+import com.example.jerem.appnghenhac.service.APIService;
+import com.example.jerem.appnghenhac.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder> {
     Context context;
     ArrayList<BaiHat>baiHats;
     int layout;
+    DataService dataService;
+    Result result=null;
     public AdapterBaihat(Context context, ArrayList<BaiHat> baiHats, int layout) {
         this.context = context;
         this.baiHats = baiHats;
         this.layout=layout;
+        dataService=APIService.getService();
     }
 
     @NonNull
@@ -58,6 +71,72 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
                 context.startActivity(intent);
             }
         });
+        holder.imglove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean kt=Object_Json.checkTonTai(0,baiHats.get(positions).getIdBaihat());
+                if(kt){
+                    Toast.makeText(context, ""+baiHats.get(positions).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    themBaiHatyeuthich(baiHats.get(positions));
+                    updateluotthich(baiHats.get(positions));
+                }
+            }
+        });
+    }
+    private void updateluotthich(final BaiHat baihat) {
+        Call<Result> callback=dataService.Update_luotthichbaihat(baihat.getIdBaihat().intValue());
+        callback.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                result=response.body();
+                if(result!=null){
+                    if(result.getResult()==true){
+                        Log.d("updateluotthich", "updateluotthich "+baihat.getTenbaihat()+" thành công !!");
+
+                    }else {
+                        Log.d("updateluotthich", "updateluotthich "+baihat.getTenbaihat()+" thất bại !!");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void themBaiHatyeuthich(final BaiHat baihat) {
+        if( Object_Json.dsBaiHatYeuThich.size()<100){
+            if(TrangChuActivity.tk !=null){
+                Call<Result> callback=dataService.ThemBaiHatYeuThich(TrangChuActivity.tk.getIdTaiKhoan(),baihat.getIdBaihat().intValue());
+                callback.enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        result=response.body();
+                        if(result!=null){
+                            if(result.getResult()==true){
+                                Object_Json.dsBaiHatYeuThich.add(baihat);
+                                Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích thành công !!", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích KHÔNG thành công !!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+
+                    }
+                });
+            }
+
+        }else {
+            Toast.makeText(context, "Danh sách bài hát yêu thích chỉ giới hạn 100 bài hát nạp thêm Vip để có thể yêu thích nhiều bài hát hơn", Toast.LENGTH_SHORT).show();
+        }
     }
 public void TimKiemBaiHat(ArrayList<BaiHat>baiHatsTimKiem)
 {
@@ -78,12 +157,13 @@ public void TimKiemBaiHat(ArrayList<BaiHat>baiHatsTimKiem)
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //imghinhbaihat txttenbaihat txttencasi frame_baihat,txtluotnghe
-        ImageView imghinhbaihat;
+        ImageView imghinhbaihat,imglove;
         TextView txttenbaihat,txttencasi,txtluotnghe;
         FrameLayout frame_baihat;
         public ViewHolder(View itemView) {
             super(itemView);
             imghinhbaihat=itemView.findViewById(R.id.imghinhbaihat);
+            imglove=itemView.findViewById(R.id.imglove);
             txttenbaihat=itemView.findViewById(R.id.txttenbaihat);
             txttencasi=itemView.findViewById(R.id.txttencasi);
             txtluotnghe=itemView.findViewById(R.id.txtluotnghe);

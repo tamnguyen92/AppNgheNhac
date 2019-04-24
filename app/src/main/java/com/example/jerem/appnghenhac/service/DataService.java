@@ -6,6 +6,7 @@ import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.model.QuangCao;
+import com.example.jerem.appnghenhac.model.Result;
 import com.example.jerem.appnghenhac.model.TaiKhoan;
 
 import java.util.List;
@@ -76,6 +77,14 @@ public interface DataService {
     Call<List<BaiHat>>Getdata_BaiHatYeuThich (@Field("mataikhoan") int mataikhoan);
 
     @FormUrlEncoded
+    @POST("taikhoan/album")
+    Call<List<Album>>Getdata_AlbumYeuThich (@Field("mataikhoan") int mataikhoan);
+
+    @FormUrlEncoded
+    @POST("taikhoan/thembaihatyeuthich")
+    Call<Result>ThemBaiHatYeuThich (@Field("mataikhoan") int mataikhoan,@Field("mabaihat") int mabaihat);
+
+    @FormUrlEncoded
     @POST("playlist/theochude")
     Call<List<Playlist>> Getdata_PlaylistTheoChude(@Field("idchude") int idchude);
 
@@ -92,8 +101,20 @@ public interface DataService {
     Call<List<BaiHat>> Getdata_TimKiemBaiHat(@Field("tenbaihat") String tenbaihat);
 
     @FormUrlEncoded
+    @POST("baihat/updateluotthich")
+    Call<Result> Update_luotthichbaihat(@Field("mabaihat") int mabaihat);
+
+    @FormUrlEncoded
     @POST("album/search")
     Call<List<Album>> Getdata_TimKiemAlbum(@Field("tenalbum") String tenalbbum);
+
+    @FormUrlEncoded
+    @POST("album/updateluotthich")
+    Call<Result> Update_luotthichalbum(@Field("maalbum") int maalbum);
+
+    @FormUrlEncoded
+    @POST("taikhoan/themalbumyeuthich")
+    Call<Result>ThemAlbumYeuThich (@Field("mataikhoan") int mataikhoan,@Field("maalbum") int maalbum);
 
     @FormUrlEncoded
     @POST("playlist/search")

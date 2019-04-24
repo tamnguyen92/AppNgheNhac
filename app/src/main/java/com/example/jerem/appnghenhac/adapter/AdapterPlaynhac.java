@@ -34,7 +34,7 @@ public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHo
     @Override
     public AdapterPlaynhac.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=inflater.inflate(R.layout.layout_custom_play_danhsach_baihat,parent,false);
+        View view=inflater.inflate(R.layout.layout_custom_baihat_play_danhsach,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
 
         return viewHolder;

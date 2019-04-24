@@ -12,12 +12,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeuThich.ViewHolder>  {
     Context context;
@@ -52,7 +55,8 @@ public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeu
             public void onClick(View v) {
                 Log.d("VITRI", "onClick: "+positions);
                 Intent intent=new Intent(context,PlayNhacActivity.class);
-                intent.putExtra("cakhuc",baiHats.get(positions));
+                PlayMusic2.position=positions;
+                intent.putExtra("listcakhuc",baiHats);
                 context.startActivity(intent);
             }
         });
@@ -64,7 +68,8 @@ public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeu
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imghinhbaihat,imgdowloard;
+        CircleImageView imghinhbaihat;
+        ImageView imgdowloard;
         TextView txttenbaihat,txttencasi,txtluotnghe;
         FrameLayout frame_baihat;
         public ViewHolder(View itemView) {

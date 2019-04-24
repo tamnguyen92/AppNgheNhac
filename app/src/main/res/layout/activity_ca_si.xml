@@ -133,6 +133,8 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:tint="@color/white"
+        app:backgroundTint="@color/mau6"
         android:layout_margin="5dp"
         android:src="@drawable/iconlove"
         app:layout_anchor="@id/main.appbar"

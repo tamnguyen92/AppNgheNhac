@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
-import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterBanner;
@@ -120,7 +119,7 @@ public class Fragment_Trang_Chu extends Fragment {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 baiHatsgoiy= (ArrayList<BaiHat>) response.body();
-                Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
+//                Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
                 if(baiHatsgoiy.size()>0){
                     RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
                     adapterBaihatgoiy=new AdapterBaihat(getActivity(),baiHatsgoiy,R.layout.layout_custom_baihat_timkiem);
@@ -277,7 +276,7 @@ public class Fragment_Trang_Chu extends Fragment {
                 Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
                 if(baiHats.size()>0){
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
-                    adapterBaihat=new AdapterBaihat(getActivity(),baiHats,R.layout.layout_custom_baihat);
+                    adapterBaihat=new AdapterBaihat(getActivity(),baiHats,R.layout.layout_custom_baihat_vertical);
                     lstBaiHat.setHasFixedSize(true);
                     lstBaiHat.setLayoutManager(layoutManager);
                     lstBaiHat.setAdapter(adapterBaihat);

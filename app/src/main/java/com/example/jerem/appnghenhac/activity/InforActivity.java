@@ -172,7 +172,7 @@ String title="";
                 if(baiHats.size()>0){
                     ProgressBarInfor.setVisibility(View.INVISIBLE);
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,3);
-                    adapterBaihat=new AdapterBaihat(InforActivity.this,baiHats,R.layout.layout_custom_baihat);
+                    adapterBaihat=new AdapterBaihat(InforActivity.this,baiHats,R.layout.layout_custom_baihat_vertical);
                     lstInfor.setHasFixedSize(true);
                     lstInfor.setLayoutManager(layoutManager);
                     lstInfor.setAdapter(adapterBaihat);
@@ -197,7 +197,7 @@ String title="";
                 if(baiHats.size()>0){
                     ProgressBarInfor.setVisibility(View.INVISIBLE);
                     RecyclerView.LayoutManager layoutManager=new GridLayoutManager(InforActivity.this,3);
-                    adapterBaihat=new AdapterBaihat(InforActivity.this,baiHats,R.layout.layout_custom_baihat);
+                    adapterBaihat=new AdapterBaihat(InforActivity.this,baiHats,R.layout.layout_custom_baihat_vertical);
                     lstInfor.setHasFixedSize(true);
                     lstInfor.setLayoutManager(layoutManager);
                     lstInfor.setAdapter(adapterBaihat);

@@ -11,22 +11,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
+import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.Object_Json;
+import com.example.jerem.appnghenhac.model.Result;
+import com.example.jerem.appnghenhac.service.APIService;
+import com.example.jerem.appnghenhac.service.DataService;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //txttenbaihatplay,txttencasiplay,txtsothutu
 public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacList.ViewHolder>{
     Context context;
     ArrayList<BaiHat>baiHats;
-
+    DataService dataService;
+    Result result=null;
     public AdapterPlaynhacList(Context context, ArrayList<BaiHat> baiHats) {
+        dataService=APIService.getService();
         this.context = context;
         this.baiHats = baiHats;
 
@@ -38,7 +50,7 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(R.layout.layout_custom_play_danhsach_baihat2,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
-
+        
         return viewHolder;
     }
 
@@ -77,7 +89,74 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
                 context.startActivity(intent);
             }
         });
+        holder.imglove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                boolean kt=Object_Json.checkTonTai(0,baiHats.get(position).getIdBaihat());
+                if(kt){
+                    Toast.makeText(context, ""+baiHats.get(position).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    themBaiHatyeuthich(baiHats.get(position));
+                    updateluotthich(baiHats.get(position));
+                }
+            }
+        });
+
+    }
+
+    private void updateluotthich(final BaiHat baihat) {
+        Call<Result> callback=dataService.Update_luotthichbaihat(baihat.getIdBaihat().intValue());
+        callback.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                result=response.body();
+                if(result!=null){
+                    if(result.getResult()==true){
+                        Log.d("updateluotthich", "updateluotthich "+baihat.getTenbaihat()+" thành công !!");
+
+                    }else {
+                        Log.d("updateluotthich", "updateluotthich "+baihat.getTenbaihat()+" thất bại !!");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void themBaiHatyeuthich(final BaiHat baihat) {
+        if( Object_Json.dsBaiHatYeuThich.size()<100){
+            if(TrangChuActivity.tk !=null){
+                Call<Result> callback=dataService.ThemBaiHatYeuThich(TrangChuActivity.tk.getIdTaiKhoan(),baihat.getIdBaihat().intValue());
+                callback.enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        result=response.body();
+                        if(result!=null){
+                            if(result.getResult()==true){
+                                Object_Json.dsBaiHatYeuThich.add(baihat);
+                                Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích thành công !!", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích KHÔNG thành công !!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+
+                    }
+                });
+            }
+
+        }else {
+            Toast.makeText(context, "Danh sách bài hát yêu thích chỉ giới hạn 100 bài hát nạp thêm Vip để có thể yêu thích nhiều bài hát hơn", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -88,12 +167,13 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
     public class ViewHolder extends RecyclerView.ViewHolder {
       TextView txttenbaihatplay,txttencasiplay,txtsothutu;
       LinearLayout fram_danhsachbaihat;
-      ImageView imggif;
+      ImageView imggif,imglove;
         public ViewHolder(View itemView) {
             super(itemView);
             txttencasiplay=itemView.findViewById(R.id.txttencasiplay); fram_danhsachbaihat=itemView.findViewById(R.id.fram_danhsachbaihat);
             txttenbaihatplay=itemView.findViewById(R.id.txttenbaihatplay); txtsothutu=itemView.findViewById(R.id.txtsothutu);
             imggif=itemView.findViewById(R.id.imggif);
+            imglove=itemView.findViewById(R.id.imglove);
 
         }
     }

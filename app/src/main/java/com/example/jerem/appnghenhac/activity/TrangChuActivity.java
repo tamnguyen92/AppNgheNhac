@@ -27,6 +27,7 @@ import com.example.jerem.appnghenhac.designe.BuilderManager;
 import com.example.jerem.appnghenhac.fragment.Fragment_Tim_Kiem;
 import com.example.jerem.appnghenhac.fragment.Fragment_Trang_Chu;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
+import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Object_Json;
 import com.example.jerem.appnghenhac.model.TaiKhoan;
@@ -64,7 +65,7 @@ public class TrangChuActivity extends AppCompatActivity {
    public LinearLayout layoutSearch;
     Random rand = new Random();
     Object_Json object_json =null;
-    TaiKhoan tk=null;
+    public  static TaiKhoan tk=null;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     int PERMISSION_CODE =10000;
@@ -89,7 +90,28 @@ DataService dataService;
 
          if(tk!=null){
              getDataBaiHatYeuThich(tk.getIdTaiKhoan());
+             getDataAlbumYeuThich(tk.getIdTaiKhoan());
          }
+         object_json.GetBaiHatLichsu();
+    }
+
+    private void getDataAlbumYeuThich(Integer idTaiKhoan) {
+        Call<List<Album>> callback=dataService.Getdata_AlbumYeuThich(idTaiKhoan);
+        callback.enqueue(new Callback<List<Album>>() {
+            @Override
+            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
+                Object_Json.dsAlbumYeuThich= (ArrayList<Album>) response.body();
+                if(  Object_Json.dsAlbumYeuThich.size()>0){
+                    Log.d("dsAlbumYeuThich","dsAlbumYeuThich: "+Object_Json.dsBaiHatYeuThich.size());
+                    object_json.SaveAlbumYeuThich(Object_Json.dsAlbumYeuThich);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Album>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataBaiHatYeuThich(int mataikhoan) {
@@ -142,20 +164,24 @@ DataService dataService;
                     startActivity(intentchude);
                     break;
                 case 1:
-                    Intent intentcasi=new Intent(this,InforActivity.class);
-                    intentcasi.putExtra("casi",1);
-                    startActivity(intentcasi);
+                    Intent intentbaihatyeuthich=new Intent(this,UserActivity.class);
+                    intentbaihatyeuthich.putExtra("baihatyeuthich",1);
+                    startActivity(intentbaihatyeuthich);
                     break;
-                case 2:break;
+                case 2:
+                    Intent intentalbumyeuthich=new Intent(this,UserActivity.class);
+                    intentalbumyeuthich.putExtra("albumyeuthich",1);
+                    startActivity(intentalbumyeuthich);
+                    break;
                 case 3:
                     Intent intentplaylist=new Intent(this,InforActivity.class);
                     intentplaylist.putExtra("playlist",3);
                     startActivity(intentplaylist);
                     break;
                 case 4:
-                    Intent intentalbum=new Intent(this,InforActivity.class);
-                    intentalbum.putExtra("Album",4);
-                    startActivity(intentalbum);
+                    Intent intentbaihatlichsu=new Intent(this,UserActivity.class);
+                    intentbaihatlichsu.putExtra("baihatlichsu",4);
+                    startActivity(intentbaihatlichsu);
                     break;
                 case 5:
                     Intent intentbaihatnghenhieu=new Intent(this,InforActivity.class);
