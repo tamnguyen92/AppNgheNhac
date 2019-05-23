@@ -77,6 +77,7 @@ public Object_Json object_json=new Object_Json(this);
                 taiKhoans=(ArrayList<TaiKhoan>) response.body();
                 if(taiKhoans.size()>0){
                     Toast.makeText(LoginActivity.this, "dang nhap thanh cong", Toast.LENGTH_SHORT).show();
+                    TrangChuActivity.taiKhoan=taiKhoans.get(0);
                     object_json.SaveAccount(taiKhoans.get(0));
                     Intent intent=new Intent(LoginActivity.this,TrangChuActivity.class);
                     startActivity(intent);

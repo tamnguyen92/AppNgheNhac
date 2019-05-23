@@ -33,6 +33,7 @@ import com.example.jerem.appnghenhac.model.Object_Json;
 import com.example.jerem.appnghenhac.model.TaiKhoan;
 import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
+
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextOutsideCircleButton;
@@ -46,10 +47,13 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+//  <item name="android:windowTranslucentStatus">true</item>
+//        <item name="android:windowTranslucentNavigation">true</item>
+//        <item name="android:statusBarColor">@color/colortran</item>
 public class TrangChuActivity extends AppCompatActivity {
     public static boolean isplaying=false;
     public static BaiHat baiHat=null;
+    public static TaiKhoan taiKhoan=null;
 
     private BoomMenuButton bmb1,bmb;
     int[] colors={R.color.maudo,R.color.maucam,R.color.mauvang,R.color.mauxanh,R.color.mauluc,R.color.maulam,R.color.maucham,R.color.mautim
@@ -93,6 +97,7 @@ DataService dataService;
              getDataAlbumYeuThich(tk.getIdTaiKhoan());
          }
          object_json.GetBaiHatLichsu();
+         object_json.GetBaiHatDownloard();
     }
 
     private void getDataAlbumYeuThich(Integer idTaiKhoan) {
@@ -174,9 +179,9 @@ DataService dataService;
                     startActivity(intentalbumyeuthich);
                     break;
                 case 3:
-                    Intent intentplaylist=new Intent(this,InforActivity.class);
-                    intentplaylist.putExtra("playlist",3);
-                    startActivity(intentplaylist);
+                    Intent intentbaihatdown=new Intent(this,UserActivity.class);
+                    intentbaihatdown.putExtra("downloard",3);
+                    startActivity(intentbaihatdown);
                     break;
                 case 4:
                     Intent intentbaihatlichsu=new Intent(this,UserActivity.class);
@@ -184,15 +189,11 @@ DataService dataService;
                     startActivity(intentbaihatlichsu);
                     break;
                 case 5:
-                    Intent intentbaihatnghenhieu=new Intent(this,InforActivity.class);
-                    intentbaihatnghenhieu.putExtra("baihatnghenhieu",5);
+                    Intent intentbaihatnghenhieu=new Intent(this,LoginActivity.class);
+
                     startActivity(intentbaihatnghenhieu);
                     break;
-                case 6:
-                    Intent intentalbumnghenhieu=new Intent(this,InforActivity.class);
-                    intentalbumnghenhieu.putExtra("albumnghenhieu",6);
-                    startActivity(intentalbumnghenhieu);
-                    break;
+
             }
         }
     }

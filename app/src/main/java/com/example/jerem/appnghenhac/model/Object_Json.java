@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,6 +15,7 @@ public class Object_Json {
     public static ArrayList<BaiHat>dsBaiHatYeuThich=new ArrayList<>();
     public static ArrayList<BaiHat>dsBaiHatLichSu=new ArrayList<>();
     public static ArrayList<Album>dsAlbumYeuThich=new ArrayList<>();
+    public static ArrayList<BaiHat>dsBaiHatDownloard=new ArrayList<>();
     public Object_Json(Context context) {
         this.context = context;
     }
@@ -78,7 +80,29 @@ public class Object_Json {
         return dsBaiHatLichSu;
 
     }
+    public void SaveBaiHatDownloard(ArrayList<BaiHat> dsbaihat)
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("baihatdownloard"+TrangChuActivity.taiKhoan.getIdTaiKhoan(),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson=new Gson();
+        String json=gson.toJson(dsbaihat);
+        editor.putString("dsbaihatdownloard"+TrangChuActivity.taiKhoan.getIdTaiKhoan(),json);
+        editor.apply();
+    }
+    public ArrayList<BaiHat> GetBaiHatDownloard()
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("baihatdownloard"+TrangChuActivity.taiKhoan.getIdTaiKhoan(),Context.MODE_PRIVATE);
+        Gson gson=new Gson();
+        String json="";
+        json=sharedPreferences.getString("dsbaihatdownloard"+TrangChuActivity.taiKhoan.getIdTaiKhoan(),null);
+        if(json!=null){
+            Type type=new TypeToken<ArrayList<BaiHat>>(){}.getType();
+            dsBaiHatDownloard=gson.fromJson(json,type);
+            return dsBaiHatDownloard;
+        }
+        return dsBaiHatDownloard;
 
+    }
     public static boolean checkTonTai(int loai,int id){
         if(loai==0){
             if( Object_Json.dsBaiHatYeuThich.size()>0){
@@ -92,7 +116,7 @@ public class Object_Json {
                 return false;
             }
 
-        }else {
+        }if(loai==1) {
             if( Object_Json.dsAlbumYeuThich.size()>0){
                 for (Album b : Object_Json.dsAlbumYeuThich){
                     if(b.getIdAlbum().intValue()==id){
@@ -103,7 +127,19 @@ public class Object_Json {
             }else {
                 return false;
             }
+        }if(loai==2) {
+            if( Object_Json.dsBaiHatDownloard.size()>0){
+                for (BaiHat b : Object_Json.dsBaiHatDownloard){
+                    if(b.getIdBaihat().intValue()==id){
+                        return true;
+                    }
+                }
+                return false;
+            }else {
+                return false;
+            }
         }
+        return false;
     }
 
 }

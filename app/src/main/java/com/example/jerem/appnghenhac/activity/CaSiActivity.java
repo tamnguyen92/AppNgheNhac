@@ -74,7 +74,7 @@ public class CaSiActivity extends AppCompatActivity {
 //                Log.d("TAM_LOG","ALBUMS LIST "+albums.get(0).getTenAlbum());
                     if(albums.size()>0){
                         progressBarAlbum.setVisibility(View.INVISIBLE);
-                        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(CaSiActivity.this,3);
+                        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(CaSiActivity.this,2);
                         adapterAlbum=new AdapterAlbum(CaSiActivity.this,albums);
                         recyclerViewAlbum.setHasFixedSize(true);
                         recyclerViewAlbum.setLayoutManager(layoutManager);

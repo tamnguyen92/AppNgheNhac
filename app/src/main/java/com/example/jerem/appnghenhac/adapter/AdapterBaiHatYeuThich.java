@@ -2,6 +2,7 @@ package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,25 +12,32 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jerem.appnghenhac.InterFace.DowloadComplete;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
+import com.example.jerem.appnghenhac.model.Object_Json;
+import com.example.jerem.appnghenhac.service.DownloadFile;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeuThich.ViewHolder>  {
+public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeuThich.ViewHolder>implements DowloadComplete {
     Context context;
     ArrayList<BaiHat> baiHats;
     int layout;
+    Object_Json object_json;
     public AdapterBaiHatYeuThich(Context context, ArrayList<BaiHat> baiHats, int layout) {
         this.context = context;
         this.baiHats = baiHats;
         this.layout=layout;
+        object_json=new Object_Json(context);
     }
     @NonNull
     @Override
@@ -50,6 +58,20 @@ public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeu
         holder.txttencasi.setText(baiHats.get(positions).getTencasiBaihat());
         holder.txtluotnghe.setText(baiHats.get(positions).getLuotngheBaihat()+"");
         holder.imgdowloard.setVisibility(View.VISIBLE);
+        holder.imgdowloard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaiHat baiHat=baiHats.get(positions);
+                boolean kt=Object_Json.checkTonTai(2,baiHats.get(positions).getIdBaihat());
+                if(kt){
+                    Toast.makeText(context, ""+baiHats.get(positions).getTenbaihat()+"bài hát này đã downloard", Toast.LENGTH_SHORT).show();
+                }else {
+                   if(baiHat!=null){
+                       dowloard(baiHat,positions);
+                   }
+                }
+            }
+        });
         holder.frame_baihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +83,46 @@ public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeu
             }
         });
     }
+    private void dowloard(BaiHat baiHat,int positions) {
+        File folder = new File(Environment.getExternalStorageDirectory() +
+                File.separator + "EnvyMusic");
+        boolean success = true;
+        if (!folder.exists()) {
+            success = folder.mkdirs();
+            if(success){
+                Toast.makeText(context, "floder tao thanh cong", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(context, "floder tao KO thanh cong", Toast.LENGTH_SHORT).show();
+            }
+
+        }else {
+            Toast.makeText(context, "floder da ton tai", Toast.LENGTH_SHORT).show();
+            DownloadFile downloadFile=new DownloadFile(this);
+            String path=Environment.getExternalStorageDirectory() +
+                    File.separator + "EnvyMusic/"+baiHat.getIdBaihat()+"-"+baiHat.getTenbaihat();
+            Log.d("PATH_MUSIC", path);
+            downloadFile.execute(baiHat.getLinkBaibat(),path,positions+"");
+        }
+
+    }
 
     @Override
     public int getItemCount() {
         return baiHats.size();
     }
+
+    @Override
+    public void dowload_complete(String url, int position) {
+
+        BaiHat baiHatdowloard=baiHats.get(position);
+        Toast.makeText(context, "Downloard bài hát "+baiHatdowloard.getTenbaihat()+" thanh cong", Toast.LENGTH_SHORT).show();
+        if(baiHatdowloard!=null){
+            baiHatdowloard.setLinkBaibat(url);
+            Object_Json.dsBaiHatDownloard.add(baiHatdowloard);
+            object_json.SaveBaiHatDownloard(Object_Json.dsBaiHatDownloard);
+        }
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imghinhbaihat;

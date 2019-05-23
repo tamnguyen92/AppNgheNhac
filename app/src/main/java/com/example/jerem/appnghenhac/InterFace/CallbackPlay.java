@@ -1,4 +1,4 @@
-package com.example.jerem.appnghenhac;
+package com.example.jerem.appnghenhac.InterFace;
 
 public interface CallbackPlay {
     public void complete();

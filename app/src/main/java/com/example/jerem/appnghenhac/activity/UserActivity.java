@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.jerem.appnghenhac.InterFace.DowloadComplete;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaiHatYeuThich;
@@ -24,7 +25,7 @@ import com.example.jerem.appnghenhac.model.Object_Json;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements DowloadComplete {
 ProgressBar ProgressBarUser;
 Toolbar tool_bar_user;
 TextView txttitlebaihatyeuthich;
@@ -97,6 +98,19 @@ public static boolean isreverseBaihat=false;
                 ProgressBarUser.setVisibility(View.GONE);
                 Collections.reverse(Object_Json.dsAlbumYeuThich);
             }
+        }if(intent.hasExtra("downloard")){
+            getSupportActionBar().setTitle("Downloard ");
+            txttitlebaihatyeuthich.setText("Downloard ");
+            if(Object_Json.dsBaiHatDownloard.size()>0){
+                RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(UserActivity.this);
+                adapterBaihat=new AdapterBaihat(UserActivity.this,Object_Json.dsBaiHatDownloard,R.layout.layout_custom_baihat_lichsu);
+                lst_user_list.setHasFixedSize(true);
+                lst_user_list.setLayoutManager(layoutManager);
+                lst_user_list.setAdapter(adapterBaihat);
+                adapterBaihat.notifyDataSetChanged();
+                ProgressBarUser.setVisibility(View.GONE);
+
+            }
         }
         if(intent.hasExtra("baihatlichsu")){
             getSupportActionBar().setTitle("Lịch sữ ");
@@ -126,5 +140,12 @@ public static boolean isreverseBaihat=false;
             adapterBaiHatYeuThich.notifyDataSetChanged();
         }
         super.onResume();
+    }
+
+    @Override
+    public void dowload_complete(String url, int position) {
+        if(adapterBaihat !=null){
+            adapterBaihat.notifyDataSetChanged();
+        }
     }
 }

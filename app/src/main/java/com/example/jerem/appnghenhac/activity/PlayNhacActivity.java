@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
-import com.example.jerem.appnghenhac.CallbackPlay;
+import com.example.jerem.appnghenhac.InterFace.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterViewPageListNhac;

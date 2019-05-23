@@ -6,15 +6,13 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.AudioVisualization;
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
-import com.example.jerem.appnghenhac.CallbackPlay;
+import com.example.jerem.appnghenhac.InterFace.CallbackPlay;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
-import com.example.jerem.appnghenhac.activity.UserActivity;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Object_Json;
@@ -77,6 +75,7 @@ public class PlayMusic2 {
                          int giay= (int) (thoigian*100 - phut*100);
                         Log.d("THOIGIAN",thoigian+" phut"+"="+phut+" giay "+giay);
                         totalTimeLengthInMilliseconds = (phut*60 + giay)*1000;
+                        PlayNhacActivity.btnplay.setImageResource(R.drawable.pause_white);
 
                     }else {
                         totalTimeLengthInMilliseconds = mPlayer.getDuration();
