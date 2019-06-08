@@ -69,4 +69,14 @@
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/backgroundsublayout2"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|right"
+        android:id="@+id/linearlayouttrangchu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+    </LinearLayout>
 </FrameLayout>

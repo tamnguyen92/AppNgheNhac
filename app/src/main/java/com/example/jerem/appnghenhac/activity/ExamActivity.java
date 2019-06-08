@@ -1,13 +1,20 @@
 package com.example.jerem.appnghenhac.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Environment;
 import android.os.Handler;
 import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.AudioVisualization;
@@ -20,18 +27,64 @@ import com.example.jerem.appnghenhac.service.DownloadFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class ExamActivity extends AppCompatActivity implements DowloadComplete {
 MediaPlayer mediaPlayer;
+TextView txtSpeechInput;
+Button btnSpeak;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
-     //   dowloard();
-        String path=Environment.getExternalStorageDirectory() +
-                File.separator + "EnvyMusic/"+"sorry.mp3";
-        playMusic(path);
+        txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
+        btnSpeak = findViewById(R.id.btnSpeak);
+        btnSpeak.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                promptSpeechInput();
+            }
+        });
+//     //   dowloard();
+//        String path=Environment.getExternalStorageDirectory() +
+//                File.separator + "EnvyMusic/"+"sorry.mp3";
+//        playMusic(path);
+
+    }
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    txtSpeechInput.setText(result.get(0));
+                }
+                break;
+            }
+
+        }
     }
 
     private void playMusic(String Uri) {

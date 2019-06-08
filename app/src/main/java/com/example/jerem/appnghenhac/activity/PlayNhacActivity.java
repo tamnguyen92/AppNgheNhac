@@ -50,6 +50,9 @@ public   SeekBar seekbarsong;
 public  static AppCompatActivity playNhacActivity;
     public  Runnable runnable=null;
     public  Handler handler=null;
+
+    Boolean issuffle=true;
+    Boolean isrepeat=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,14 +119,14 @@ public  static AppCompatActivity playNhacActivity;
         }
 
         if(PlayMusic2.modePlay==1){
-            btnsuffle.setImageResource(R.drawable.shuffle_white);
-            btnrepeat.setImageResource(R.drawable.replay_black);
+            btnsuffle.setAlpha(0.5f);
+            btnrepeat.setAlpha(1.0f);
         } if(PlayMusic2.modePlay==2){
-            btnsuffle.setImageResource(R.drawable.shuffle_black);
-            btnrepeat.setImageResource(R.drawable.replay_white);
+            btnsuffle.setAlpha(1.0f);
+            btnrepeat.setAlpha(0.5f);
         }if(PlayMusic2.modePlay==0){
-            btnsuffle.setImageResource(R.drawable.shuffle_white);
-            btnrepeat.setImageResource(R.drawable.replay_white);
+            btnsuffle.setAlpha(0.5f);
+            btnrepeat.setAlpha(0.5f);
         }
     }
 
@@ -307,9 +310,19 @@ public  static AppCompatActivity playNhacActivity;
      int id=v.getId();
      switch (id){
          case R.id.btnsuffle:
-             btnsuffle.setImageResource(R.drawable.shuffle_black);
-             btnrepeat.setImageResource(R.drawable.replay_white);
-             PlayMusic2.modePlay=2;
+             if(issuffle==true){
+                 PlayMusic2.modePlay=2;
+                 btnsuffle.setAlpha(1.0f);
+                 btnrepeat.setAlpha(0.5f);
+                 issuffle=!issuffle;
+//                 btnsuffle.setImageResource(R.drawable.shuffle_black);
+//                 btnrepeat.setImageResource(R.drawable.replay_white);
+             }else {
+                 PlayMusic2.modePlay=0;
+                 btnsuffle.setAlpha(0.5f);
+                 btnrepeat.setAlpha(0.5f);
+                 issuffle=!issuffle;
+             }
              break;
          case R.id.btnpre:
              xulypre();
@@ -321,9 +334,22 @@ public  static AppCompatActivity playNhacActivity;
              xulynext();
              break;
          case R.id.btnrepeat:
-            PlayMusic2.modePlay=1;
-             btnsuffle.setImageResource(R.drawable.shuffle_white);
-             btnrepeat.setImageResource(R.drawable.replay_black);
+             if(isrepeat==true){
+                 PlayMusic2.modePlay=1;
+                 btnsuffle.setAlpha(0.5f);
+                 btnrepeat.setAlpha(1.0f);
+                 isrepeat=!isrepeat;
+//                 btnsuffle.setImageResource(R.drawable.shuffle_black);
+//                 btnrepeat.setImageResource(R.drawable.replay_white);
+             }else {
+                 PlayMusic2.modePlay=0;
+                 btnsuffle.setAlpha(0.5f);
+                 btnrepeat.setAlpha(0.5f);
+                 isrepeat=!isrepeat;
+             }
+//            PlayMusic2.modePlay=1;
+//             btnsuffle.setImageResource(R.drawable.shuffle_white);
+//             btnrepeat.setImageResource(R.drawable.replay_black);
              break;
      }
     }

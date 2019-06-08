@@ -54,7 +54,7 @@ public class PlayMusic2 {
 
         try {
             mPlayer =new MediaPlayer();
-
+            PlayNhacActivity.btnplay.setImageResource(R.drawable.pause_white);
             Log.d("LOG_TAMm", "Play: "+url);
             mPlayer.setDataSource(url);
            handlerVisualizer = VisualizerDbmHandler.Factory.newVisualizerHandler(context,mPlayer.getAudioSessionId());
@@ -132,9 +132,11 @@ public class PlayMusic2 {
     }
 
     private static void xulythembaihatLichSu(BaiHat baiHat) {
+
         if(Object_Json.dsBaiHatLichSu.size()== 50){
             Object_Json.dsBaiHatLichSu.remove(49);
-        }else {
+            Object_Json.dsBaiHatLichSu.remove(48);
+        }
             if(Object_Json.dsBaiHatLichSu.size()>2){
                 int index=Object_Json.dsBaiHatLichSu.size()-1;
                 if(Object_Json.dsBaiHatLichSu.get(0).getIdBaihat().intValue()== baiHat.getIdBaihat().intValue()){
@@ -155,6 +157,6 @@ public class PlayMusic2 {
                 Log.d("xulythembaihatLichSu", "xulythembaihatLichSu: "+Object_Json.dsBaiHatLichSu.size());
             }
 
-        }
+
     }
 }

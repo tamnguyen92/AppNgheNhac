@@ -2,6 +2,8 @@ package com.example.jerem.appnghenhac.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterCasi;
 import com.example.jerem.appnghenhac.adapter.AdapterChuDe;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaylist;
+import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.CaSi;
@@ -40,10 +44,14 @@ Toolbar tool_bar_infor;
 RecyclerView lstInfor;
 ProgressBar ProgressBarInfor;
 int dataIntent=-1;
+
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
 DataService dataService;
 ImageView imgtimkieminfor;
 TextView txttitle;
-
+LinearLayout linearlayouttrangchu;
 ArrayList<ChuDe>chuDes;
 AdapterChuDe adapterChuDe;
 
@@ -66,11 +74,31 @@ String title="";
         dataService=APIService.getService();
         GetIntent();
         addControll();
+        addFragment();
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        addFragment();
+    }
 
+    private void addFragment() {
+        if(TrangChuActivity.isplaying==true){
+
+            linearlayouttrangchu.setVisibility(View.VISIBLE);
+            fragmentManager =getSupportFragmentManager();
+            fragmentTransaction=fragmentManager.beginTransaction();
+            Fragment_sub_play_music fragment_sub_play_music=new Fragment_sub_play_music();
+
+            fragmentTransaction.replace(R.id.linearlayouttrangchu,fragment_sub_play_music);
+            fragmentTransaction.commit();
+        }
+    }
     private void addControll() {
+        linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
+        linearlayouttrangchu.setVisibility(View.GONE);
         tool_bar_infor=findViewById(R.id.tool_bar_infor);
         lstInfor=findViewById(R.id.lstInfor);
         imgtimkieminfor=findViewById(R.id.imgtimkieminfor);

@@ -2,6 +2,8 @@ package com.example.jerem.appnghenhac.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaiHatYeuThich;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
+import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Object_Json;
 
@@ -31,20 +35,32 @@ Toolbar tool_bar_user;
 TextView txttitlebaihatyeuthich;
 ImageView imgtimkieminfor;
 
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
+
 RecyclerView lst_user_list;
 AdapterBaiHatYeuThich adapterBaiHatYeuThich;
     AdapterBaihat adapterBaihat;
 AdapterAlbum adapterAlbum;
+LinearLayout linearlayouttrangchu;
 public static boolean isreverseBaihat=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
+        linearlayouttrangchu.setVisibility(View.GONE);
+
         ProgressBarUser=findViewById(R.id.ProgressBarUser);
         tool_bar_user=findViewById(R.id.tool_bar_user);
         txttitlebaihatyeuthich=findViewById(R.id.txttitlebaihatyeuthich);
         imgtimkieminfor=findViewById(R.id.imgtimkieminfor);
         lst_user_list=findViewById(R.id.lsbaihatyeuthich);
+
+        addFragment();
+
         imgtimkieminfor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +81,18 @@ public static boolean isreverseBaihat=false;
             }
         });
         getDataIntent();
+    }
+    private void addFragment() {
+        if(TrangChuActivity.isplaying==true){
+
+            linearlayouttrangchu.setVisibility(View.VISIBLE);
+            fragmentManager =getSupportFragmentManager();
+            fragmentTransaction=fragmentManager.beginTransaction();
+            Fragment_sub_play_music fragment_sub_play_music=new Fragment_sub_play_music();
+
+            fragmentTransaction.replace(R.id.linearlayouttrangchu,fragment_sub_play_music);
+            fragmentTransaction.commit();
+        }
     }
 
     private void getDataIntent() {
@@ -130,6 +158,7 @@ public static boolean isreverseBaihat=false;
 
     @Override
     protected void onResume() {
+        addFragment();
         if(adapterBaihat!=null){
             adapterBaihat.notifyDataSetChanged();
         }

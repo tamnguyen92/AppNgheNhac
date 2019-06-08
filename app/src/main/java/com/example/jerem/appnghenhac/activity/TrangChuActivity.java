@@ -1,9 +1,12 @@
 package com.example.jerem.appnghenhac.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -42,6 +46,7 @@ import com.nightonke.boommenu.ButtonEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -73,11 +78,12 @@ public class TrangChuActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     int PERMISSION_CODE =10000;
+    ImageButton imghinhmicro;
 LinearLayout linearlayouttrangchu;
 DataService dataService;
  EditText txtsearch;
     Fragment_Tim_Kiem fragment_tim_kiem;
-    float dX, dY;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,7 +242,7 @@ DataService dataService;
 
     private void addControll() {
 
-
+        imghinhmicro=findViewById(R.id.imghinh);
         txtsearch=findViewById(R.id.txtsearch);
         linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
         linearlayouttrangchu.setVisibility(View.GONE);
@@ -293,9 +299,46 @@ DataService dataService;
 
             }
         });
-
+        imghinhmicro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptSpeechInput();
+            }
+        });
+    }
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                 //   fragment_tim_kiem.TimKiem(result.get(0));
+                    txtsearch.setText(result.get(0));
+                }
+                break;
+            }
+
+        }
+    }
     private void XulyClick(int index) {
         if(index>=0){
             switch (index){

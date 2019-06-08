@@ -72,9 +72,19 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
 
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/backgroundsublayout2"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|right"
+        android:id="@+id/linearlayouttrangchu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+    </LinearLayout>
 </FrameLayout>

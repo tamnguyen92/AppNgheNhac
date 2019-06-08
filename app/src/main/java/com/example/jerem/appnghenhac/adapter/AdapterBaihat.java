@@ -24,6 +24,7 @@ import com.example.jerem.appnghenhac.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +36,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
     int layout;
     DataService dataService;
     Result result=null;
+    int chon=-1;
     public AdapterBaihat(Context context, ArrayList<BaiHat> baiHats, int layout) {
         this.context = context;
         this.baiHats = baiHats;
@@ -53,7 +55,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterBaihat.ViewHolder holder, final int positions) {
+    public void onBindViewHolder(@NonNull final AdapterBaihat.ViewHolder holder, final int positions) {
         Log.d("VITRI", "onClick: ten"+baiHats.get(positions).getTenbaihat());
         Picasso.with(context)
                 .load(baiHats.get(positions).getHinhanhBaihat().trim())
@@ -71,10 +73,16 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
                 context.startActivity(intent);
             }
         });
+        if(positions==chon){
+            holder.imglove.setVisibility(View.GONE);
+        }else {
+            holder.imglove.setVisibility(View.VISIBLE);
+        }
         holder.imglove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              chon=positions;
+              notifyDataSetChanged();
                 boolean kt=Object_Json.checkTonTai(0,baiHats.get(positions).getIdBaihat());
                 if(kt){
                     Toast.makeText(context, ""+baiHats.get(positions).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
@@ -83,6 +91,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
                     themBaiHatyeuthich(baiHats.get(positions));
                     updateluotthich(baiHats.get(positions));
                 }
+
             }
         });
     }
@@ -110,6 +119,7 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
     }
 
     private void themBaiHatyeuthich(final BaiHat baihat) {
+
         if( Object_Json.dsBaiHatYeuThich.size()<100){
             if(TrangChuActivity.tk !=null){
                 Call<Result> callback=dataService.ThemBaiHatYeuThich(TrangChuActivity.tk.getIdTaiKhoan(),baihat.getIdBaihat().intValue());
@@ -119,7 +129,9 @@ public class AdapterBaihat extends RecyclerView.Adapter<AdapterBaihat.ViewHolder
                         result=response.body();
                         if(result!=null){
                             if(result.getResult()==true){
+                                Collections.reverse( Object_Json.dsBaiHatYeuThich);
                                 Object_Json.dsBaiHatYeuThich.add(baihat);
+                                Collections.reverse( Object_Json.dsBaiHatYeuThich);
                                 Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích thành công !!", Toast.LENGTH_SHORT).show();
                             }else {
                                 Toast.makeText(context, "thêm bài hát "+baihat.getTenbaihat()+" vào ds yêu thích KHÔNG thành công !!", Toast.LENGTH_SHORT).show();
