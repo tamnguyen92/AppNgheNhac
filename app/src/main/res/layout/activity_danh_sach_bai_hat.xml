@@ -86,10 +86,10 @@
         android:layout_margin="5dp"
         android:visibility="gone"
         android:orientation="vertical"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|center"
         android:id="@+id/linearlayouttrangchu"
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

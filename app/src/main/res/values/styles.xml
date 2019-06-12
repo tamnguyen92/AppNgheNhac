@@ -19,6 +19,9 @@
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">@color/mau3</item> <!-- Whatever color you want-->
     </style>
+    <style name="AppTheme.WhiteAccentlogin">
+        <item name="colorAccent">@color/maugray</item> <!-- Whatever color you want-->
+    </style>
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">cursive</item>

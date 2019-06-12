@@ -21,6 +21,9 @@ public interface DataService {
     @GET("quangcao")
     Call<List<QuangCao>> Getdata_Banner();
 
+    @GET("quangcao/all")
+    Call<List<QuangCao>> GetAll_QuangCao();
+
     @GET("playlist")
     Call<List<Playlist>> Getdata_Playlist();
 
@@ -59,6 +62,14 @@ public interface DataService {
 
     @GET("casi/all")
     Call<List<CaSi>> Getdata_CasiAll();
+
+    @FormUrlEncoded
+    @POST("taikhoan/casy")
+    Call<List<CaSi>>Getdata_CaSiYeuThich (@Field("mataikhoan") int mataikhoan);
+
+    @FormUrlEncoded
+    @POST("taikhoan/themcasiyeuthich")
+    Call<Result>ThemCaSyYeuThich (@Field("mataikhoan") int mataikhoan,@Field("macasi") int macasi);
 
     @FormUrlEncoded
     @POST("album")
@@ -111,6 +122,10 @@ public interface DataService {
     @FormUrlEncoded
     @POST("album/updateluotthich")
     Call<Result> Update_luotthichalbum(@Field("maalbum") int maalbum);
+
+    @FormUrlEncoded
+    @POST("baihat/updateluotnghe")
+    Call<Result> Update_luotnghebaihat(@Field("mabaihat") int mabaihat);
 
     @FormUrlEncoded
     @POST("taikhoan/themalbumyeuthich")

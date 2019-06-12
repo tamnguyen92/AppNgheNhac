@@ -29,8 +29,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Fragment_sub_play_music extends Fragment {
     View view;
     public static Fragment fragment_sub_play_music=null;
-   LinearLayout linearsublayout;
-    CircleImageView imghinhsublayout;
+   LinearLayout linearsublayout,linearLayoutnho,linearLayoutlon;
+    CircleImageView imghinhsublayout,imghinhsublayoutnho;
     TextView txttenbaihatsublayout,txttencasisublayout;
     BaiHat baiHat;
     ImageView btnplaysub,btnpresub,btnnextsub;
@@ -62,6 +62,8 @@ public class Fragment_sub_play_music extends Fragment {
     public void CapnhatLayout(){
         baiHat=TrangChuActivity.baiHat;
         Picasso.with(getActivity()).load(baiHat.getHinhanhBaihat()).into(imghinhsublayout);
+        Picasso.with(getActivity()).load(baiHat.getHinhanhBaihat()).into(imghinhsublayoutnho);
+
 
         RotateAnimation rotate = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setDuration(20000);
@@ -71,10 +73,23 @@ public class Fragment_sub_play_music extends Fragment {
         rotate.setInterpolator(new LinearInterpolator());
 
         imghinhsublayout.startAnimation(rotate);
+
+        RotateAnimation rotate2 = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate2.setDuration(20000);
+        rotate2.setRepeatCount(ValueAnimator.INFINITE);
+        rotate2.setRepeatMode(ValueAnimator.INFINITE);
+        rotate2.setFillAfter(true);
+        rotate2.setInterpolator(new LinearInterpolator());
+
+        imghinhsublayoutnho.startAnimation(rotate2);
         txttenbaihatsublayout.setText(baiHat.getTenbaihat());
         txttencasisublayout.setText(baiHat.getTencasiBaihat());
     }
     private void addControll() {
+        linearLayoutnho=view.findViewById(R.id.linearLayoutnho);
+        linearLayoutlon=view.findViewById(R.id.linearLayoutlon);
+        imghinhsublayoutnho=view.findViewById(R.id.imghinhsublayoutnho);
+
         linearsublayout=view.findViewById(R.id.linearsublayout);
         imghinhsublayout=view.findViewById(R.id.imghinhsublayout);
         txttenbaihatsublayout=view.findViewById(R.id.txttenbaihatsublayout);
@@ -120,9 +135,18 @@ public class Fragment_sub_play_music extends Fragment {
         imghinhsublayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),PlayNhacActivity.class);
-                intent.putExtra("hello","hello");
-                startActivity(intent);
+//                Intent intent=new Intent(getActivity(),PlayNhacActivity.class);
+//                intent.putExtra("hello","hello");
+//                startActivity(intent);
+                linearLayoutlon.setVisibility(View.GONE);
+                linearLayoutnho.setVisibility(View.VISIBLE);
+            }
+        });
+        imghinhsublayoutnho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayoutlon.setVisibility(View.VISIBLE);
+                linearLayoutnho.setVisibility(View.GONE);
             }
         });
         if(TrangChuActivity.baiHat !=null)

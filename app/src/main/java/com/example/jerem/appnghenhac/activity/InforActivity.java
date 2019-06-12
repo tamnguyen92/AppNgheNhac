@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,15 +22,18 @@ import android.widget.TextView;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
+import com.example.jerem.appnghenhac.adapter.AdapterBanner;
 import com.example.jerem.appnghenhac.adapter.AdapterCasi;
 import com.example.jerem.appnghenhac.adapter.AdapterChuDe;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaylist;
+import com.example.jerem.appnghenhac.adapter.AdapterQuangCao;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.Album;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.CaSi;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
+import com.example.jerem.appnghenhac.model.QuangCao;
 import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
 
@@ -61,6 +66,10 @@ AdapterCasi adapterCasi;
     ArrayList<Album>albums;
     AdapterAlbum adapterAlbum;
 
+
+    ArrayList<QuangCao>quangCaos;
+    AdapterQuangCao adapterQuangCao;
+
     ArrayList<Playlist>playlists;
     AdapterPlaylist adapterPlaylist;
 
@@ -70,6 +79,8 @@ String title="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_infor);
         dataService=APIService.getService();
         GetIntent();
@@ -188,6 +199,40 @@ String title="";
                 getdataBaiHatThichnhieu();
             }
         }
+        if(intent.hasExtra("quangcao")){
+            title="Top Quảng Cáo";
+            dataIntent=intent.getIntExtra("quangcao",-1);
+            if(dataIntent>=0){
+                quangCaos=new ArrayList<>();
+                getdataQuangCao();
+            }
+        }
+    }
+
+    private void getdataQuangCao() {
+        Call<List<QuangCao>> callback=dataService.GetAll_QuangCao();
+        callback.enqueue(new Callback<List<QuangCao>>() {
+            @Override
+            public void onResponse(Call<List<QuangCao>> call, Response<List<QuangCao>> response) {
+                quangCaos= (ArrayList<QuangCao>) response.body();
+                if(quangCaos.size()>0){
+                    adapterQuangCao=new AdapterQuangCao(InforActivity.this,quangCaos);
+                    ProgressBarInfor.setVisibility(View.INVISIBLE);
+                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(InforActivity.this);
+                    //RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);  dang horizontai,false la ko roll
+
+                    lstInfor.setHasFixedSize(true);
+                    lstInfor.setLayoutManager(layoutManager);
+                    lstInfor.setAdapter(adapterQuangCao);
+                    adapterQuangCao.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<QuangCao>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getdataBaiHatThichnhieu() {

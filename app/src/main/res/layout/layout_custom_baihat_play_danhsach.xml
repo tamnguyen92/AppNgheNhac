@@ -88,11 +88,12 @@
                 android:layout_height="match_parent"
                 >
                 <ImageView
+                    android:alpha="0.5"
                     android:id="@+id/imglove"
                     android:layout_margin="2dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/iconlove"
+                    android:src="@drawable/iconloved"
                     android:layout_width="25dp"
                     android:layout_height="25dp" />
             </LinearLayout>

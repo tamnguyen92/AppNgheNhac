@@ -48,11 +48,12 @@
                     android:text="tâm sự "/>
             </LinearLayout>
             <ImageView
+                android:alpha="0.5"
                 android:visibility="gone"
                 android:id="@+id/imglove"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/iconlove"
+                android:src="@drawable/iconloved"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
         </LinearLayout>

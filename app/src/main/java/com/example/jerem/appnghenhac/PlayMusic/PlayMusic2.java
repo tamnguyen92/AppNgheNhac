@@ -16,11 +16,18 @@ import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Object_Json;
+import com.example.jerem.appnghenhac.model.Result;
+import com.example.jerem.appnghenhac.service.APIService;
+import com.example.jerem.appnghenhac.service.DataService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlayMusic2 {
     public static MediaPlayer mPlayer;
@@ -125,10 +132,35 @@ public class PlayMusic2 {
                 }
             });
             xulythembaihatLichSu(listBaihat.get(position));
+            xulyUpdateLuotNghe(listBaihat.get(position));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static void xulyUpdateLuotNghe(final BaiHat baiHat) {
+      DataService dataService=APIService.getService();
+        Call<Result> callback=dataService.Update_luotnghebaihat(baiHat.getIdBaihat().intValue());
+        callback.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+               Result result=response.body();
+                if(result!=null){
+                    if(result.getResult()==true){
+                        Log.d("updateluotnghe", "updateluotnghe "+baiHat.getTenbaihat()+" thành công !!");
+
+                    }else {
+                        Log.d("updateluotnghe", "updateluotnghe "+baiHat.getTenbaihat()+" thất bại !!");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
     }
 
     private static void xulythembaihatLichSu(BaiHat baiHat) {

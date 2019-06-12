@@ -2,16 +2,22 @@ package com.example.jerem.appnghenhac.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaylist;
+import com.example.jerem.appnghenhac.fragment.Fragment_sub_play_music;
 import com.example.jerem.appnghenhac.model.ChuDe;
 import com.example.jerem.appnghenhac.model.Playlist;
 import com.example.jerem.appnghenhac.service.APIService;
@@ -30,16 +36,23 @@ ProgressBar progressBarPlaylist;
 RecyclerView recyclerViewPlaylist;
 ChuDe chuDe=null;
 DataService dataService;
+
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+LinearLayout linearlayouttrangchu;
 String title="";
 ArrayList<Playlist>playlists;
 AdapterPlaylist adapterPlaylist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_playlist);
         addControll();
         getDataIntent();
         addTollBar();
+        addFragment();
 
     }
 
@@ -53,6 +66,12 @@ AdapterPlaylist adapterPlaylist;
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        addFragment();
     }
 
     private void getDataPlaylist(int idChude) {
@@ -74,7 +93,18 @@ AdapterPlaylist adapterPlaylist;
             }
         });
     }
+    private void addFragment() {
+        if(TrangChuActivity.isplaying==true){
 
+            linearlayouttrangchu.setVisibility(View.VISIBLE);
+            fragmentManager =getSupportFragmentManager();
+            fragmentTransaction=fragmentManager.beginTransaction();
+            Fragment_sub_play_music fragment_sub_play_music=new Fragment_sub_play_music();
+
+            fragmentTransaction.replace(R.id.linearlayouttrangchu,fragment_sub_play_music);
+            fragmentTransaction.commit();
+        }
+    }
     private void setData() {
         adapterPlaylist=new AdapterPlaylist(this,playlists);
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(this,2);
@@ -89,6 +119,8 @@ AdapterPlaylist adapterPlaylist;
          progressBarPlaylist.setVisibility(View.VISIBLE);
         playlists=new ArrayList<>();
         dataService=APIService.getService();
+        linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
+        linearlayouttrangchu.setVisibility(View.GONE);
         toolbarPlaylist=findViewById(R.id.toolbarPlaylist);
         recyclerViewPlaylist=findViewById(R.id.recyclerViewPlaylist);
 

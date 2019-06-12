@@ -111,18 +111,19 @@
             </FrameLayout>
 
         </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@color/colortran"
+            android:layout_margin="5dp"
+            android:layout_gravity="bottom|center"
+            android:orientation="vertical"
+            android:id="@+id/linearlayouttrangchu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+        </LinearLayout>
     </FrameLayout>
-    <LinearLayout
-        android:background="@color/colortran"
-        android:layout_margin="5dp"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:id="@+id/linearlayouttrangchu"
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
 
-    </LinearLayout>
     <android.support.design.widget.TabLayout
         android:visibility="gone"
         app:tabIndicatorColor="#FF6D00"

@@ -25,6 +25,7 @@
         android:orientation="vertical">
         <android.support.v7.widget.Toolbar
             android:elevation="10dp"
+            android:background="@drawable/custom_background_black_2"
             android:id="@+id/tool_bar_infor"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -67,7 +68,7 @@
             android:layout_height="4dp"></View>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/lstInfor"
-
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="20dp"
@@ -78,13 +79,14 @@
 
     </LinearLayout>
     <LinearLayout
-        android:background="@drawable/backgroundsublayout2"
+        android:gravity="center|bottom"
+        android:background="@color/colortran"
         android:layout_margin="5dp"
         android:visibility="gone"
         android:orientation="vertical"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|center"
         android:id="@+id/linearlayouttrangchu"
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     </LinearLayout>
 </FrameLayout>

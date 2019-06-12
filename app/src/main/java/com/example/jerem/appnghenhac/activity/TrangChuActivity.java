@@ -19,6 +19,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -63,7 +65,7 @@ public class TrangChuActivity extends AppCompatActivity {
     private BoomMenuButton bmb1,bmb;
     int[] colors={R.color.maudo,R.color.maucam,R.color.mauvang,R.color.mauxanh,R.color.mauluc,R.color.maulam,R.color.maucham,R.color.mautim
             ,R.color.mautim1,R.color.mau3,R.color.mau4,R.color.mau5,R.color.mau6};
-    String[] title={"Tất cả chủ đề","Tất cả ca sỹ","Tất cả thể loại","Tất cả play list","Tất cả Album","Top ca khúc được nghe nhiều nhất"," Top Các album nghe nhiều nhất","Top 100 ca khúc","Top ca khúc được yêu thích"};
+    String[] title={"Tất cả chủ đề","Tất cả ca sỹ","Tất cả thể loại","Tất cả play list","Tất cả Album","Top ca khúc được nghe nhiều nhất"," Top Các album nghe nhiều nhất","Top Quảng cáo","Top ca khúc được yêu thích"};
 
     String[] titleHamSub={"xem thông tin của bạn","Các ca khúc bạn đã yêu thích !!","Các album bạn đã yêu thích !!","thông tin các ca khúc bạn đã dowloard !","các ca khúc nghe gần đây !","Đăng xuất khỏi ứng dụng !!"};
     TabLayout myTabLayout;
@@ -87,6 +89,7 @@ DataService dataService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_trang_chu);
         getdataShare();
         addControll();
@@ -374,7 +377,11 @@ DataService dataService;
                     intentalbumnghenhieu.putExtra("albumnghenhieu",6);
                     startActivity(intentalbumnghenhieu);
                     break;
-                case 7:break;
+                case 7:
+                    Intent intentquangcao=new Intent(this,InforActivity.class);
+                    intentquangcao.putExtra("quangcao",7);
+                    startActivity(intentquangcao);
+                    break;
                 case 8:
                     Intent intentbaihatthichnhieu=new Intent(this,InforActivity.class);
                     intentbaihatthichnhieu.putExtra("baihatthichnhieu",8);

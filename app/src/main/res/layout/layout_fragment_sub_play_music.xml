@@ -3,6 +3,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+
+        android:orientation="vertical"
+        android:id="@+id/linearLayoutnho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgdisc"
+                android:layout_gravity="center"
+                android:alpha="0.6"
+                android:src="@drawable/disc2"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center"
+                android:id="@+id/imghinhsublayoutnho"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+
+                android:scaleType="centerCrop" />
+        </FrameLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/linearLayoutlon"
         android:background="@drawable/backgroundsublayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
