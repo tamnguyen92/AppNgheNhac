@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
@@ -63,8 +64,15 @@ public class CaSiActivity extends AppCompatActivity {
         getDataIntent();
         addControll();
         init();
-        getDataBaiHat();
-        getDataAlbum();
+        if(CheckInternet.haveNetworkConnection(this)){
+            getDataBaiHat();
+            getDataAlbum();
+        }else
+        {
+            CheckInternet.xuatToast(this,"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+        }
+
     }
 
     private void getDataAlbum() {

@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.InforActivity;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
@@ -44,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Trang_Chu extends Fragment {
+public class Fragment_Trang_Chu extends Fragment implements View.OnClickListener {
     View view;
     ViewPager viewPager;
     ArrayList<QuangCao>Banners;
@@ -53,7 +55,7 @@ public class Fragment_Trang_Chu extends Fragment {
 
     Object_Json object_json;
     TaiKhoan tk;
-
+   Button btncakhucmoimore,btnplaylistmore,btnAlbummore,btnCasimore,btnChudemore;
     CircleIndicator circleIndicator;
     AdapterBanner adapterBanner;
     Runnable runnable;
@@ -64,7 +66,7 @@ public class Fragment_Trang_Chu extends Fragment {
 
     //PLAYLIST
     RecyclerView lstPlaylist;
-    Button btnplaylistmore;
+
     AdapterPlaylist adapterPlaylist;
     ArrayList<Playlist> playlists;
 
@@ -98,13 +100,20 @@ public class Fragment_Trang_Chu extends Fragment {
         view=inflater.inflate(R.layout.layout_frament_trang_chu,container,false);
         getdataShare();
         addControll();
-        getDataQuangCao();
-        getDataPlaylist();
-        getDataChuDe();
-        getData10BaiHat();
-        getDataCasi();
-        getDataAlbums();
-        getDataBiHatGoiy();
+        if(CheckInternet.haveNetworkConnection(getActivity())){
+            getDataQuangCao();
+            getDataPlaylist();
+            getDataChuDe();
+            getData10BaiHat();
+            getDataCasi();
+            getDataAlbums();
+            getDataBiHatGoiy();
+        }else
+        {
+            CheckInternet.xuatToast(getActivity(),"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+        }
+
         return view;
     }
 
@@ -183,7 +192,19 @@ public class Fragment_Trang_Chu extends Fragment {
 
         viewPager=view.findViewById(R.id.wiewPager_trangchu);
         circleIndicator=view.findViewById(R.id.indicator_trangchu);
+
         btnplaylistmore=view.findViewById(R.id.btnplaylistmore);
+        btnplaylistmore.setOnClickListener(this);
+        btncakhucmoimore=view.findViewById(R.id.btncakhucmoimore);
+        btncakhucmoimore.setOnClickListener(this);
+        btnAlbummore=view.findViewById(R.id.btnAlbummore);
+        btnAlbummore.setOnClickListener(this);
+        btnCasimore=view.findViewById(R.id.btnCasimore);
+        btnCasimore.setOnClickListener(this);
+        btnChudemore=view.findViewById(R.id.btnChudemore);
+        btnChudemore.setOnClickListener(this);
+
+
 
         btnclick=view.findViewById(R.id.btnclick);
         btnclick.setOnClickListener(new View.OnClickListener() {
@@ -327,5 +348,38 @@ public class Fragment_Trang_Chu extends Fragment {
                 Log.d("TAM_LOG",t.toString());
             }
         });
+    }
+//btncakhucmoimore,btnplaylistmore,btnAlbummore,btnCasimore,btnChudemore;
+    @Override
+    public void onClick(View v) {
+        int id=v.getId();
+        switch (id){
+            case R.id.btncakhucmoimore:
+                Intent intentbaihatnghenhieu=new Intent(getActivity(),InforActivity.class);
+                intentbaihatnghenhieu.putExtra("baihatnghenhieu",5);
+                startActivity(intentbaihatnghenhieu);
+                break;
+            case R.id.btnplaylistmore:
+                Intent intentplaylist=new Intent(getActivity(),InforActivity.class);
+                intentplaylist.putExtra("playlist",3);
+                startActivity(intentplaylist);
+                break;
+            case R.id.btnAlbummore:
+                Intent intentalbum=new Intent(getActivity(),InforActivity.class);
+                intentalbum.putExtra("Album",4);
+                startActivity(intentalbum);
+                break;
+            case R.id.btnCasimore:
+                Intent intentcasi=new Intent(getActivity(),InforActivity.class);
+                intentcasi.putExtra("casi",1);
+                startActivity(intentcasi);
+                break;
+            case R.id.btnChudemore:
+                Intent intentchude=new Intent(getActivity(),InforActivity.class);
+                intentchude.putExtra("chude",0);
+
+                startActivity(intentchude);
+                break;
+        }
     }
 }

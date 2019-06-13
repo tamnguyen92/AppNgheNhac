@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.InterFace.DowloadComplete;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
@@ -67,7 +68,14 @@ public class AdapterBaiHatYeuThich extends RecyclerView.Adapter<AdapterBaiHatYeu
                     Toast.makeText(context, ""+baiHats.get(positions).getTenbaihat()+"bài hát này đã downloard", Toast.LENGTH_SHORT).show();
                 }else {
                    if(baiHat!=null){
-                       dowloard(baiHat,positions);
+                       if(CheckInternet.haveNetworkConnection(context)){
+                           dowloard(baiHat,positions);
+                       }else
+                       {
+                           CheckInternet.xuatToast(context,"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+                       }
+
                    }
                 }
             }

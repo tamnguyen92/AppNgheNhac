@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                fragment_tim_kiem.TimKiem(s);
+                fragment_tim_kiem.TimKiem(s,0);
             }
         });
 

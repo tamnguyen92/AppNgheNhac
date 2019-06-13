@@ -3,6 +3,7 @@ package com.example.jerem.appnghenhac.activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
@@ -18,15 +19,18 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.jerem.appnghenhac.BroadCast.NetworkChangeReceiver;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterMainViewPage;
 import com.example.jerem.appnghenhac.designe.BuilderManager;
@@ -57,10 +61,11 @@ import retrofit2.Response;
 //  <item name="android:windowTranslucentStatus">true</item>
 //        <item name="android:windowTranslucentNavigation">true</item>
 //        <item name="android:statusBarColor">@color/colortran</item>
-public class TrangChuActivity extends AppCompatActivity {
+public class TrangChuActivity extends AppCompatActivity implements View.OnTouchListener {
     public static boolean isplaying=false;
     public static BaiHat baiHat=null;
     public static TaiKhoan taiKhoan=null;
+    public int codeSpeed=0;
 
     private BoomMenuButton bmb1,bmb;
     int[] colors={R.color.maudo,R.color.maucam,R.color.mauvang,R.color.mauxanh,R.color.mauluc,R.color.maulam,R.color.maucham,R.color.mautim
@@ -70,9 +75,10 @@ public class TrangChuActivity extends AppCompatActivity {
     String[] titleHamSub={"xem thông tin của bạn","Các ca khúc bạn đã yêu thích !!","Các album bạn đã yêu thích !!","thông tin các ca khúc bạn đã dowloard !","các ca khúc nghe gần đây !","Đăng xuất khỏi ứng dụng !!"};
     TabLayout myTabLayout;
     ViewPager myViewPager;
-
+ImageView imgmicro;
+    float dX, dY;
     LinearLayout frame;
-   public FrameLayout layoutTrangchu;
+   public FrameLayout layoutTrangchu,linearlayoutmicro;
    public LinearLayout layoutSearch;
     Random rand = new Random();
     Object_Json object_json =null;
@@ -86,9 +92,13 @@ DataService dataService;
  EditText txtsearch;
     Fragment_Tim_Kiem fragment_tim_kiem;
     private final int REQ_CODE_SPEECH_INPUT = 100;
+    NetworkChangeReceiver networkChangeReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ListennerInternet();
+
 
         setContentView(R.layout.activity_trang_chu);
         getdataShare();
@@ -96,6 +106,19 @@ DataService dataService;
         init();
         addPermission();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkChangeReceiver);
+    }
+
+    private void ListennerInternet() {
+        networkChangeReceiver=new NetworkChangeReceiver();
+        IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(networkChangeReceiver, intentFilter);
+    }
+
     private void getdataShare() {
         dataService=APIService.getService();
          object_json = new Object_Json(this);
@@ -207,6 +230,31 @@ DataService dataService;
         }
     }
 
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+
+        switch (event.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+
+                dX = view.getX() - event.getRawX();
+                dY = view.getY() - event.getRawY();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+
+                view.animate()
+                        .x(event.getRawX() + dX)
+                        .y(event.getRawY() + dY)
+                        .setDuration(0)
+                        .start();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
     public boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
             for (String permission : permissions) {
@@ -222,7 +270,8 @@ DataService dataService;
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE,
                     android.Manifest.permission.RECORD_AUDIO,
-                    android.Manifest.permission.MODIFY_AUDIO_SETTINGS
+                    android.Manifest.permission.MODIFY_AUDIO_SETTINGS,
+                    android.Manifest.permission.ACCESS_NETWORK_STATE
 
             };
 
@@ -244,10 +293,21 @@ DataService dataService;
     }
 
     private void addControll() {
+        linearlayoutmicro=findViewById(R.id.linearlayoutmicro);
+        linearlayoutmicro.setOnTouchListener(this);
+        imgmicro=findViewById(R.id.imgmicro);
 
+        imgmicro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codeSpeed=1;
+                promptSpeechInput();
+            }
+        });
         imghinhmicro=findViewById(R.id.imghinh);
         txtsearch=findViewById(R.id.txtsearch);
         linearlayouttrangchu=findViewById(R.id.linearlayouttrangchu);
+
         linearlayouttrangchu.setVisibility(View.GONE);
         myTabLayout=findViewById(R.id.myTabLayout);
         myViewPager=findViewById(R.id.myViewPager);
@@ -305,6 +365,7 @@ DataService dataService;
         imghinhmicro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                codeSpeed=0;
                 promptSpeechInput();
             }
         });
@@ -335,13 +396,20 @@ DataService dataService;
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                  //   fragment_tim_kiem.TimKiem(result.get(0));
-                    txtsearch.setText(result.get(0));
+                    if(codeSpeed==0) {
+                        txtsearch.setText(result.get(0));
+                    }
+                    if(codeSpeed==1){
+                        fragment_tim_kiem.TimKiem(result.get(0),1);
+                        Toast.makeText(this, "SPEEK_LOGGGG"+result.get(0), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             }
 
         }
     }
+
     private void XulyClick(int index) {
         if(index>=0){
             switch (index){
@@ -356,7 +424,9 @@ DataService dataService;
                     intentcasi.putExtra("casi",1);
                     startActivity(intentcasi);
                     break;
-                case 2:break;
+                case 2:
+                    fragment_tim_kiem.TimKiem("ocean",0);
+                    break;
                 case 3:
                     Intent intentplaylist=new Intent(this,InforActivity.class);
                     intentplaylist.putExtra("playlist",3);
@@ -401,6 +471,7 @@ DataService dataService;
 
             fragmentTransaction.replace(R.id.linearlayouttrangchu,fragment_sub_play_music);
             fragmentTransaction.commit();
+
         }
         super.onResume();
     }
@@ -434,7 +505,7 @@ DataService dataService;
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-               fragment_tim_kiem.TimKiem(s);
+               fragment_tim_kiem.TimKiem(s,0);
             }
         });
         //tiep

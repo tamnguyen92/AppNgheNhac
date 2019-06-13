@@ -168,6 +168,9 @@ public class PlayMusic2 {
         if(Object_Json.dsBaiHatLichSu.size()== 50){
             Object_Json.dsBaiHatLichSu.remove(49);
             Object_Json.dsBaiHatLichSu.remove(48);
+            Object_Json.dsBaiHatLichSu.remove(47);
+            Object_Json.dsBaiHatLichSu.remove(46);
+            Object_Json.dsBaiHatLichSu.remove(45);
         }
             if(Object_Json.dsBaiHatLichSu.size()>2){
                 int index=Object_Json.dsBaiHatLichSu.size()-1;

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
@@ -97,9 +98,15 @@ public class AdapterPlaynhacList extends RecyclerView.Adapter<AdapterPlaynhacLis
                 if(kt){
                     Toast.makeText(context, ""+baiHats.get(position).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
                 }else {
+                    if(CheckInternet.haveNetworkConnection(context)){
+                        themBaiHatyeuthich(baiHats.get(position));
+                        updateluotthich(baiHats.get(position));
+                    }else
+                    {
+                        CheckInternet.xuatToast(context,"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
 
-                    themBaiHatyeuthich(baiHats.get(position));
-                    updateluotthich(baiHats.get(position));
+                    }
+
                 }
             }
         });

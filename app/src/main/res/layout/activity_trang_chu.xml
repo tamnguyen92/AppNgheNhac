@@ -122,6 +122,25 @@
             android:layout_height="wrap_content">
 
         </LinearLayout>
+        <FrameLayout
+
+            android:visibility="visible"
+            android:background="@drawable/backgroundsublayout2"
+            android:layout_margin="5dp"
+            android:layout_gravity="bottom|left"
+            android:id="@+id/linearlayoutmicro"
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+            <ImageView
+                android:alpha="0.8"
+                android:layout_gravity="center"
+                android:id="@+id/imgmicro"
+                android:layout_margin="10dp"
+                android:src="@drawable/microphonered"
+                android:scaleType="centerCrop"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+        </FrameLayout>
     </FrameLayout>
 
     <android.support.design.widget.TabLayout

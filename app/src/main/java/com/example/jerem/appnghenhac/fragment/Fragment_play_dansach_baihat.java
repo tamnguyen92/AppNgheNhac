@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.InterFace.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
@@ -27,6 +28,14 @@ public class Fragment_play_dansach_baihat extends Fragment implements CallbackPl
         view=inflater.inflate(R.layout.layout_fragment_play_dansach_baihat,container,false);
         addControll();
         addData();
+        if(CheckInternet.haveNetworkConnection(getActivity())){
+
+        }else
+        {
+            CheckInternet.xuatToast(getActivity(),"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+        }
+
         return view;
     }
 

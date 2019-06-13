@@ -58,6 +58,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ca khúc mới nhất :"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btncakhucmoimore"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/button_infor"
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
 
         </LinearLayout>
 
@@ -103,7 +115,7 @@
         <Button
             android:id="@+id/btnplaylistmore"
             android:layout_marginRight="5dp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/button_infor"
             android:gravity="right"
             android:layout_gravity="center"
             android:layout_width="25dp"
@@ -151,7 +163,7 @@
             <Button
                 android:id="@+id/btnAlbummore"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/custom_button"
+                android:background="@drawable/button_infor"
                 android:gravity="right"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -199,7 +211,7 @@
             <Button
                 android:id="@+id/btnCasimore"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/custom_button"
+                android:background="@drawable/button_infor"
                 android:gravity="right"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -242,6 +254,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chủ Đề nổi bật :"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnChudemore"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/button_infor"
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
 
         </LinearLayout>
 

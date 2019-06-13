@@ -1,28 +1,29 @@
 package com.example.jerem.appnghenhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
-import com.example.jerem.appnghenhac.InterFace.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.activity.TrangChuActivity;
 import com.example.jerem.appnghenhac.model.BaiHat;
 import com.example.jerem.appnghenhac.model.Object_Json;
 import com.example.jerem.appnghenhac.model.Result;
 import com.example.jerem.appnghenhac.service.APIService;
 import com.example.jerem.appnghenhac.service.DataService;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,76 +32,69 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//txttenbaihatplay,txttencasiplay,txtsothutu
-public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHolder>{
+public class AdapterBaiHatLichSu extends RecyclerView.Adapter<AdapterBaiHatLichSu.ViewHolder> {
     Context context;
     ArrayList<BaiHat>baiHats;
-    CallbackPlay callbackPlay=null;
+    int layout;
     DataService dataService;
     Result result=null;
     int chon=-1;
-    public AdapterPlaynhac(Context context, ArrayList<BaiHat> baiHats, CallbackPlay callbackPlay) {
+    public AdapterBaiHatLichSu(Context context, ArrayList<BaiHat> baiHats, int layout) {
         this.context = context;
         this.baiHats = baiHats;
-        this.callbackPlay=callbackPlay;
+        this.layout=layout;
         dataService=APIService.getService();
     }
 
     @NonNull
-    @Override
-    public AdapterPlaynhac.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=inflater.inflate(R.layout.layout_custom_baihat_play_danhsach,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
 
+    @Override
+    public AdapterBaiHatLichSu.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view=inflater.inflate(layout,parent,false);
+        ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPlaynhac.ViewHolder holder, final int position) {
-        int stt=position+1;
-        BaiHat baiHat=baiHats.get(position);
-        holder.txttencasiplay.setText(baiHat.getTencasiBaihat());
-        holder.txttenbaihatplay.setText(baiHat.getTenbaihat());
-        holder.txtsothutu.setText(stt+"");
-        if(position==chon){
+    public void onBindViewHolder(@NonNull final AdapterBaiHatLichSu.ViewHolder holder, final int positions) {
+        Log.d("VITRI", "onClick: ten"+baiHats.get(positions).getTenbaihat());
+        Picasso.with(context)
+                .load(baiHats.get(positions).getHinhanhBaihat().trim())
+                .into(holder.imghinhbaihat);
+        holder.txttenbaihat.setText(baiHats.get(positions).getTenbaihat());
+        holder.txttencasi.setText(baiHats.get(positions).getTencasiBaihat());
+        holder.txtluotnghe.setText(baiHats.get(positions).getLuotngheBaihat()+"");
+
+        holder.frame_baihat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("VITRI", "onClick: "+positions);
+                Intent intent=new Intent(context,PlayNhacActivity.class);
+                intent.putExtra("listcakhuc",baiHats);
+                PlayMusic2.position=positions;
+//                Intent intent=new Intent(context,PlayNhacActivity.class);
+//                intent.putExtra("cakhuc",baiHats.get(positions));
+                context.startActivity(intent);
+            }
+        });
+        if(positions==chon){
             holder.imglove.setVisibility(View.GONE);
         }else {
             holder.imglove.setVisibility(View.VISIBLE);
         }
-        if(position==PlayMusic2.position){
-            holder.imggif.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(R.drawable.gif_radio1)// you may not need this
-                    .into(holder.imggif);
-             holder.txtsothutu.setVisibility(View.INVISIBLE);
-        }else {
-
-            holder.imggif.setImageResource(R.drawable.replay_black);
-            holder.imggif.setVisibility(View.INVISIBLE);
-            holder.txtsothutu.setVisibility(View.VISIBLE);
-        }
-        holder.fram_danhsachbaihat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(callbackPlay!=null){
-                   PlayMusic2.position=position;
-                   callbackPlay.play_nhac_tu_ds();
-               }
-            }
-        });
         holder.imglove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chon=position;
-                notifyDataSetChanged();
-                boolean kt=Object_Json.checkTonTai(0,baiHats.get(position).getIdBaihat());
+              chon=positions;
+              notifyDataSetChanged();
+                boolean kt=Object_Json.checkTonTai(0,baiHats.get(positions).getIdBaihat());
                 if(kt){
-                    Toast.makeText(context, ""+baiHats.get(position).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, ""+baiHats.get(positions).getTenbaihat()+"đã tồn tại trong ds bai hat yeu thich", Toast.LENGTH_SHORT).show();
                 }else {
                     if(CheckInternet.haveNetworkConnection(context)){
-                        themBaiHatyeuthich(baiHats.get(position));
-                        updateluotthich(baiHats.get(position));
+                        themBaiHatyeuthich(baiHats.get(positions));
+                        updateluotthich(baiHats.get(positions));
                     }else
                     {
                         CheckInternet.xuatToast(context,"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
@@ -111,7 +105,6 @@ public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHo
 
             }
         });
-
     }
     private void updateluotthich(final BaiHat baihat) {
         Call<Result> callback=dataService.Update_luotthichbaihat(baihat.getIdBaihat().intValue());
@@ -137,6 +130,7 @@ public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHo
     }
 
     private void themBaiHatyeuthich(final BaiHat baihat) {
+
         if( Object_Json.dsBaiHatYeuThich.size()<100){
             if(TrangChuActivity.tk !=null){
                 Call<Result> callback=dataService.ThemBaiHatYeuThich(TrangChuActivity.tk.getIdTaiKhoan(),baihat.getIdBaihat().intValue());
@@ -167,22 +161,36 @@ public class AdapterPlaynhac extends RecyclerView.Adapter<AdapterPlaynhac.ViewHo
             Toast.makeText(context, "Danh sách bài hát yêu thích chỉ giới hạn 100 bài hát nạp thêm Vip để có thể yêu thích nhiều bài hát hơn", Toast.LENGTH_SHORT).show();
         }
     }
+public void TimKiemBaiHat(ArrayList<BaiHat>baiHatsTimKiem)
+{
+    baiHats.clear();
+    if(baiHatsTimKiem !=null){
+
+        baiHats=baiHatsTimKiem;
+        for(BaiHat b : baiHats){
+            Log.d("VITRI", "onClick: ten"+b.getTenbaihat());
+        }
+        notifyDataSetChanged();
+    }
+}
     @Override
     public int getItemCount() {
         return baiHats.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-      TextView txttenbaihatplay,txttencasiplay,txtsothutu;
-      LinearLayout fram_danhsachbaihat;
-      ImageView imggif,imglove;
+        //imghinhbaihat txttenbaihat txttencasi frame_baihat,txtluotnghe
+        ImageView imghinhbaihat,imglove;
+        TextView txttenbaihat,txttencasi,txtluotnghe;
+        FrameLayout frame_baihat;
         public ViewHolder(View itemView) {
             super(itemView);
-            txttencasiplay=itemView.findViewById(R.id.txttencasiplay); fram_danhsachbaihat=itemView.findViewById(R.id.fram_danhsachbaihat);
-            txttenbaihatplay=itemView.findViewById(R.id.txttenbaihatplay); txtsothutu=itemView.findViewById(R.id.txtsothutu);
-            imggif=itemView.findViewById(R.id.imggif);
+            imghinhbaihat=itemView.findViewById(R.id.imghinhbaihat);
             imglove=itemView.findViewById(R.id.imglove);
-
+            txttenbaihat=itemView.findViewById(R.id.txttenbaihat);
+            txttencasi=itemView.findViewById(R.id.txttencasi);
+            txtluotnghe=itemView.findViewById(R.id.txtluotnghe);
+            frame_baihat=itemView.findViewById(R.id.frame_baihat);
         }
     }
 }

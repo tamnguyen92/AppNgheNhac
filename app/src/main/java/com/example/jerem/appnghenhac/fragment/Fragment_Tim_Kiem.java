@@ -1,5 +1,6 @@
 package com.example.jerem.appnghenhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
+import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
+import com.example.jerem.appnghenhac.activity.PlayNhacActivity;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterCasi;
@@ -31,12 +35,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.jerem.appnghenhac.PlayMusic.PlayMusic2.modePlay;
+import static com.example.jerem.appnghenhac.PlayMusic.PlayMusic2.position;
+
 public class Fragment_Tim_Kiem extends Fragment {
     View view;
-    TextView txtbaihat,txtnghesi,txtalbum,txtplaylist;
+    TextView txtnghesi,txtalbum,txtplaylist;
+    public TextView txtbaihat;
     RecyclerView lstTimkiemBaihat;
     AdapterBaihat adapterBaihat;
     ArrayList<BaiHat>baiHatsTimKiem;
+    int modeSearch=0;
 
     RecyclerView lstTimkiemNgheSi;
     ArrayList<CaSi>casisTimKiem;
@@ -56,7 +65,10 @@ public class Fragment_Tim_Kiem extends Fragment {
         addControll();
         return view;
     }
+public void TimKiemGiongNoi(String s){
 
+
+}
     private void addControll() {
         dataService=APIService.getService();
         lstTimkiemBaihat=view.findViewById(R.id.lstTimkiemBaihat);
@@ -107,14 +119,21 @@ public class Fragment_Tim_Kiem extends Fragment {
         adapterPlaylist.notifyDataSetChanged();
     }
 
-    public void TimKiem(CharSequence s){
-
+    public void TimKiem(CharSequence s,int mode){
+        modeSearch=mode;
         if(s.length()>=2){
             Log.d("TEXTCHANE", "onTextChanged: "+s);
-            TimKiemBaiHat(s.toString());
-            TimKiemCasi(s.toString());
-            TimKiemAlbum(s.toString());
-            TimKiemPlaylist(s.toString());
+            if(CheckInternet.haveNetworkConnection(getActivity())){
+                TimKiemBaiHat(s.toString());
+                TimKiemCasi(s.toString());
+                TimKiemAlbum(s.toString());
+                TimKiemPlaylist(s.toString());
+            }else
+            {
+                CheckInternet.xuatToast(getActivity(),"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+            }
+
         }else {
             baiHatsTimKiem=new ArrayList<>();
             casisTimKiem=new ArrayList<>();
@@ -180,6 +199,7 @@ public class Fragment_Tim_Kiem extends Fragment {
                 // Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
                 if(playlists!=null){
                     adapterPlaylist.TimKiemPlaylist(playlists);
+
                 }
                 if(playlists.size()>0){
                     txtplaylist.setVisibility(View.VISIBLE);
@@ -204,6 +224,20 @@ public class Fragment_Tim_Kiem extends Fragment {
                // Log.d("TAM_LOG","BAIHAT LIST "+baiHats.get(0).getTenbaihat());
                 if(baiHatsTimKiem != null){
                    adapterBaihat.TimKiemBaiHat(baiHatsTimKiem);
+                   if(modeSearch==1){
+                       if(baiHatsTimKiem.size()>0){
+                           Intent intent=new Intent(getActivity(),PlayNhacActivity.class);
+                           intent.putExtra("listcakhuc",baiHatsTimKiem);
+                           PlayMusic2.position=0;
+//                Intent intent=new Intent(context,PlayNhacActivity.class);
+//                intent.putExtra("cakhuc",baiHats.get(positions));
+                           getActivity().startActivity(intent);
+                       }
+
+                   }
+//
+//                    lstTimkiemBaihat.findViewHolderForAdapterPosition(0).itemView.performClick();
+
                 }
                 if(baiHatsTimKiem.size()>0){
                     txtbaihat.setVisibility(View.VISIBLE);

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.jerem.appnghenhac.InterFace.DowloadComplete;
 import com.example.jerem.appnghenhac.R;
 import com.example.jerem.appnghenhac.adapter.AdapterAlbum;
+import com.example.jerem.appnghenhac.adapter.AdapterBaiHatLichSu;
 import com.example.jerem.appnghenhac.adapter.AdapterBaiHatYeuThich;
 import com.example.jerem.appnghenhac.adapter.AdapterBaihat;
 import com.example.jerem.appnghenhac.adapter.AdapterPlaynhac;
@@ -40,7 +41,7 @@ ImageView imgtimkieminfor;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
-
+AdapterBaiHatLichSu adapterBaiHatLichSu;
 RecyclerView lst_user_list;
 AdapterBaiHatYeuThich adapterBaiHatYeuThich;
     AdapterBaihat adapterBaihat;
@@ -135,11 +136,11 @@ LinearLayout linearlayouttrangchu;
             txttitlebaihatyeuthich.setText("Downloard ");
             if(Object_Json.dsBaiHatDownloard.size()>0){
                 RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(UserActivity.this);
-                adapterBaihat=new AdapterBaihat(UserActivity.this,Object_Json.dsBaiHatDownloard,R.layout.layout_custom_baihat_lichsu);
+                adapterBaiHatLichSu=new AdapterBaiHatLichSu(UserActivity.this,Object_Json.dsBaiHatDownloard,R.layout.layout_custom_baihat_lichsu);
                 lst_user_list.setHasFixedSize(true);
                 lst_user_list.setLayoutManager(layoutManager);
-                lst_user_list.setAdapter(adapterBaihat);
-                adapterBaihat.notifyDataSetChanged();
+                lst_user_list.setAdapter(adapterBaiHatLichSu);
+                adapterBaiHatLichSu.notifyDataSetChanged();
                 ProgressBarUser.setVisibility(View.GONE);
 
             }
@@ -149,11 +150,11 @@ LinearLayout linearlayouttrangchu;
             txttitlebaihatyeuthich.setText("Lịch sữ ");
             if(Object_Json.dsBaiHatLichSu.size()>0){
                 RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(UserActivity.this);
-                adapterBaihat=new AdapterBaihat(UserActivity.this,Object_Json.dsBaiHatLichSu,R.layout.layout_custom_baihat_lichsu);
+                adapterBaiHatLichSu=new AdapterBaiHatLichSu(UserActivity.this,Object_Json.dsBaiHatLichSu,R.layout.layout_custom_baihat_lichsu);
                 lst_user_list.setHasFixedSize(true);
                 lst_user_list.setLayoutManager(layoutManager);
-                lst_user_list.setAdapter(adapterBaihat);
-                adapterBaihat.notifyDataSetChanged();
+                lst_user_list.setAdapter(adapterBaiHatLichSu);
+                adapterBaiHatLichSu.notifyDataSetChanged();
                 ProgressBarUser.setVisibility(View.GONE);
 
             }
@@ -163,6 +164,9 @@ LinearLayout linearlayouttrangchu;
     @Override
     protected void onResume() {
         addFragment();
+        if(adapterBaiHatLichSu!=null){
+            adapterBaiHatLichSu.notifyDataSetChanged();
+        }
         if(adapterBaihat!=null){
             adapterBaihat.notifyDataSetChanged();
         }

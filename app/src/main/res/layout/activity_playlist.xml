@@ -35,7 +35,7 @@
         </LinearLayout>
         <LinearLayout
             android:gravity="bottom|center"
-            android:background="@drawable/backgroundsublayout2"
+            android:background="@color/colortran"
             android:layout_margin="5dp"
             android:visibility="gone"
             android:orientation="vertical"

@@ -23,6 +23,7 @@ import com.cleveroad.audiovisualization.AudioVisualization;
 import com.cleveroad.audiovisualization.DbmHandler;
 import com.cleveroad.audiovisualization.SpeechRecognizerDbmHandler;
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
 import com.squareup.picasso.Picasso;
@@ -45,6 +46,14 @@ public class Fragment_play_nhac extends Fragment {
         txttenbaihat1=view.findViewById(R.id.txttenbaihat1);
         txttencasi1=view.findViewById(R.id.txttencasi1);
         imgdisc=view.findViewById(R.id.imgdisc);
+
+        if(CheckInternet.haveNetworkConnection(getActivity())){
+
+        }else
+        {
+            CheckInternet.xuatToast(getActivity(),"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+        }
 
         RotateAnimation rotate = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setDuration(20000);

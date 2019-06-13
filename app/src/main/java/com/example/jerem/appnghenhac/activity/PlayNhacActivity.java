@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleveroad.audiovisualization.VisualizerDbmHandler;
+import com.example.jerem.appnghenhac.BroadCast.CheckInternet;
 import com.example.jerem.appnghenhac.InterFace.CallbackPlay;
 import com.example.jerem.appnghenhac.PlayMusic.PlayMusic2;
 import com.example.jerem.appnghenhac.R;
@@ -67,6 +68,14 @@ public  static AppCompatActivity playNhacActivity;
         addControll();
         LayDuLieuIntent();
         playNhac();
+        if(CheckInternet.haveNetworkConnection(this)){
+
+        }else
+        {
+            CheckInternet.xuatToast(this,"Không có kết nối internet Vui lòng kiểm tra kết nối internet!!");
+
+        }
+
     }
     public void playNhacfromlist(){
         huytientrinh();
@@ -84,7 +93,10 @@ public  static AppCompatActivity playNhacActivity;
             seekbarsong.setSecondaryProgress(PlayMusic2.bufferingUpdate);
             txtviewtongtimesong.setText(simpleDateFormat.format(PlayMusic2.totalTimeLengthInMilliseconds));
             primarySeekBarProgressUpdater();
-            Fragment_play_dansach_baihat.adapterPlaynhac.notifyDataSetChanged();
+            if(Fragment_play_dansach_baihat.adapterPlaynhac!=null){
+                Fragment_play_dansach_baihat.adapterPlaynhac.notifyDataSetChanged();
+            }
+
             eventClick();
             showButton();
 
@@ -103,15 +115,7 @@ public  static AppCompatActivity playNhacActivity;
             }
         }
 
-//        PlayMusic2.mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//
-//                   handler.removeCallbacks(runnable);
-////                PlayMusic2.Play(PlayMusic2.listBaihat.get(PlayMusic2.position).getLinkBaibat().trim(),seekbarsong,txtviewtongtimesong,txtviewtimesong);
-////                 primarySeekBarProgressUpdater();
-//            }
-//        });
+
 
     }
 
@@ -190,8 +194,8 @@ public  static AppCompatActivity playNhacActivity;
         }
             Log.d("LOG_TAMm", "check mode: "+PlayMusic2.position);
                 huytientrinh();
-                eventClick();
                 PlayMusic2.Play(PlayMusic2.listBaihat.get(PlayMusic2.position).getLinkBaibat().trim(),seekbarsong,txtviewtongtimesong,this,this);
+                eventClick();
                 primarySeekBarProgressUpdater();
                 Fragment_play_dansach_baihat.adapterPlaynhac.notifyDataSetChanged();
     }
@@ -447,6 +451,6 @@ public  static AppCompatActivity playNhacActivity;
     public void onDestroy() {
 
         super.onDestroy();
-        PlayMusic2.audioVisualization.release();
+//        PlayMusic2.audioVisualization.release();
     }
 }

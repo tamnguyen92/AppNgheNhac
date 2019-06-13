@@ -8,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,20 +28,22 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Fragment_sub_play_music extends Fragment {
+public class Fragment_sub_play_music extends Fragment implements View.OnTouchListener {
     View view;
     public static Fragment fragment_sub_play_music=null;
    LinearLayout linearsublayout,linearLayoutnho,linearLayoutlon;
     CircleImageView imghinhsublayout,imghinhsublayoutnho;
     TextView txttenbaihatsublayout,txttencasisublayout;
     BaiHat baiHat;
-    ImageView btnplaysub,btnpresub,btnnextsub;
+    FrameLayout frame;
+    ImageView btnplaysub,btnpresub,btnnextsub,imgdisc;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.layout_fragment_sub_play_music,container,false);
         fragment_sub_play_music=this;
+        view.setOnTouchListener(this);
         Log.d("Fragment_sub_play_music", "onCreateView: ");
         addControll();
         return view;
@@ -53,7 +57,32 @@ public class Fragment_sub_play_music extends Fragment {
             btnplaysub.setImageResource(R.drawable.play_button);
         }
     }
+    float dX, dY;
 
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+
+        switch (event.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+
+                dX = view.getX() - event.getRawX();
+                dY = view.getY() - event.getRawY();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+
+                view.animate()
+                        .x(event.getRawX() + dX)
+                        .y(event.getRawY() + dY)
+                        .setDuration(0)
+                        .start();
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
     @Override
     public void onResume() {
 
@@ -86,10 +115,12 @@ public class Fragment_sub_play_music extends Fragment {
         txttencasisublayout.setText(baiHat.getTencasiBaihat());
     }
     private void addControll() {
+        frame=view.findViewById(R.id.frame);
         linearLayoutnho=view.findViewById(R.id.linearLayoutnho);
         linearLayoutlon=view.findViewById(R.id.linearLayoutlon);
         imghinhsublayoutnho=view.findViewById(R.id.imghinhsublayoutnho);
 
+        imgdisc=view.findViewById(R.id.imgdisc);
         linearsublayout=view.findViewById(R.id.linearsublayout);
         imghinhsublayout=view.findViewById(R.id.imghinhsublayout);
         txttenbaihatsublayout=view.findViewById(R.id.txttenbaihatsublayout);
@@ -140,6 +171,13 @@ public class Fragment_sub_play_music extends Fragment {
 //                startActivity(intent);
                 linearLayoutlon.setVisibility(View.GONE);
                 linearLayoutnho.setVisibility(View.VISIBLE);
+            }
+        });
+        imgdisc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayoutlon.setVisibility(View.VISIBLE);
+                linearLayoutnho.setVisibility(View.GONE);
             }
         });
         imghinhsublayoutnho.setOnClickListener(new View.OnClickListener() {
